@@ -1,1073 +1,919 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
-<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hanahx - Top Fans</title>
-
-<!-- Font Awesome -->
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
->
-
-<!-- Google Font -->
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
->
-
-<style>
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        background: #050507;
-        color: white;
-        font-family: "Inter", Arial, sans-serif;
-        overflow-x: hidden;
-    }
-
-    /* =========================
-       BACKGROUND
-    ========================= */
-
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: -3;
-
-        background:
-            radial-gradient(
-                circle at 50% 0%,
-                rgba(120, 50, 255, 0.25),
-                transparent 40%
-            ),
-
-            radial-gradient(
-                circle at 0% 80%,
-                rgba(80, 30, 200, 0.12),
-                transparent 35%
-            ),
-
-            #050507;
-    }
-
-    body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 999;
-
-        background-image:
-            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
-    }
-
-    /* =========================
-       NAVBAR
-    ========================= */
-
-    .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 75px;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        padding: 0 7%;
-
-        background: rgba(5, 5, 7, 0.65);
-        backdrop-filter: blur(18px);
-
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-        z-index: 100;
-    }
-
-    .logo {
-        font-size: 22px;
-        font-weight: 900;
-        letter-spacing: -1px;
-    }
-
-    .logo span {
-        color: #8c4dff;
-    }
-
-    .home-button {
-        padding: 11px 20px;
-
-        border-radius: 10px;
-
-        background: rgba(255, 255, 255, 0.05);
-
-        border: 1px solid rgba(255, 255, 255, 0.08);
-
-        color: #aaa;
-
-        text-decoration: none;
-
-        font-size: 13px;
-        font-weight: 700;
-
-        transition: 0.25s ease;
-    }
-
-    .home-button:hover {
-        color: white;
-
-        background: rgba(124, 60, 255, 0.15);
-
-        border-color: rgba(140, 77, 255, 0.4);
-
-        transform: translateY(-2px);
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-        padding: 150px 20px 60px;
-        text-align: center;
-    }
-
-    .hero-content {
-        max-width: 850px;
-        margin: auto;
-
-        animation: fadeUp 0.8s ease forwards;
-    }
-
-    .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-
-        padding: 7px 13px;
-
-        border-radius: 999px;
-
-        background: rgba(124, 60, 255, 0.1);
-
-        border: 1px solid rgba(124, 60, 255, 0.25);
-
-        color: #c4a4ff;
-
-        font-size: 12px;
-        font-weight: 800;
-
-        margin-bottom: 20px;
-    }
-
-    .eyebrow i {
-        color: #8c4dff;
-    }
-
-    .hero h1 {
-        font-size: clamp(45px, 8vw, 82px);
-
-        line-height: 0.95;
-
-        font-weight: 900;
-
-        letter-spacing: -4px;
-
-        margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-        background: linear-gradient(
-            90deg,
-            #ffffff,
-            #9b63ff,
-            #d0b7ff
-        );
-
-        -webkit-background-clip: text;
-        background-clip: text;
-
-        color: transparent;
-    }
-
-    .hero p {
-        color: #888;
-
-        font-size: 15px;
-
-        line-height: 1.7;
-
-        max-width: 600px;
-
-        margin: auto;
-    }
-
-    /* =========================
-       SEARCH
-    ========================= */
-
-    .search-container {
-        max-width: 700px;
-
-        margin: 35px auto 0;
-
-        position: relative;
-    }
-
-    .search-box {
-        width: 100%;
-
-        display: flex;
-
-        align-items: center;
-
-        padding: 17px 20px;
-
-        border-radius: 14px;
-
-        background: rgba(255, 255, 255, 0.045);
-
-        border: 1px solid rgba(255, 255, 255, 0.09);
-
-        backdrop-filter: blur(12px);
-
-        transition: 0.3s ease;
-    }
-
-    .search-box:focus-within {
-        border-color: rgba(140, 77, 255, 0.6);
-
-        box-shadow:
-            0 0 0 4px rgba(140, 77, 255, 0.08),
-            0 15px 50px rgba(124, 60, 255, 0.1);
-    }
-
-    .search-box i {
-        color: #777;
-
-        font-size: 17px;
-
-        margin-right: 12px;
-    }
-
-    .search-box input {
-        width: 100%;
-
-        border: none;
-
-        outline: none;
-
-        background: transparent;
-
-        color: white;
-
-        font-family: inherit;
-
-        font-size: 14px;
-    }
-
-    .search-box input::placeholder {
-        color: #666;
-    }
-
-    /* =========================
-       FANS SECTION
-    ========================= */
-
-    .fans-section {
-        max-width: 1150px;
-
-        margin: auto;
-
-        padding: 40px 7% 130px;
-    }
-
-    .section-header {
-        text-align: center;
-
-        margin-bottom: 35px;
-    }
-
-    .section-header small {
-        color: #8c4dff;
-
-        font-size: 11px;
-
-        font-weight: 800;
-
-        letter-spacing: 2px;
-    }
-
-    .section-header h2 {
-        margin-top: 9px;
-
-        font-size: 34px;
-
-        font-weight: 900;
-
-        letter-spacing: -1.5px;
-    }
-
-    .section-header p {
-        color: #777;
-
-        margin-top: 8px;
-
-        font-size: 13px;
-    }
-
-    /* =========================
-       FAN GRID
-    ========================= */
-
-    .fans-grid {
-        display: grid;
-
-        grid-template-columns:
-            repeat(3, 1fr);
-
-        gap: 15px;
-    }
-
-    /* =========================
-       FAN CARD
-    ========================= */
-
-    .fan-card {
-        position: relative;
-
-        padding: 30px 25px;
-
-        min-height: 200px;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        justify-content: center;
-
-        text-align: center;
-
-        background: rgba(255, 255, 255, 0.035);
-
-        border: 1px solid rgba(255, 255, 255, 0.07);
-
-        border-radius: 17px;
-
-        overflow: hidden;
-
-        transition:
-            transform 0.3s ease,
-            border-color 0.3s ease,
-            background 0.3s ease;
-
-        animation: fadeUp 0.7s ease both;
-    }
-
-    .fan-card::before {
-        content: "";
-
-        position: absolute;
-
-        width: 170px;
-        height: 170px;
-
-        right: -70px;
-        bottom: -90px;
-
-        background: #8c4dff;
-
-        filter: blur(70px);
-
-        opacity: 0;
-
-        transition: 0.4s ease;
-    }
-
-    .fan-card:hover {
-        transform: translateY(-7px);
-
-        border-color: rgba(140, 77, 255, 0.45);
-
-        background: rgba(140, 77, 255, 0.07);
-    }
-
-    .fan-card:hover::before {
-        opacity: 0.25;
-    }
-
-    /* =========================
-       HEARTS
-    ========================= */
-
-    .fan-hearts {
-        position: relative;
-
-        z-index: 2;
-
-        display: flex;
-
-        justify-content: center;
-
-        gap: 4px;
-
-        margin-bottom: 12px;
-    }
-
-    .fan-hearts i {
-        color: #8c4dff;
-
-        font-size: 14px;
-
-        filter:
-            drop-shadow(
-                0 0 7px
-                rgba(140, 77, 255, 0.6)
-            );
-
-        animation: heartFloat 2s ease-in-out infinite;
-    }
-
-    .fan-hearts i:nth-child(2) {
-        animation-delay: 0.15s;
-    }
-
-    .fan-hearts i:nth-child(3) {
-        animation-delay: 0.3s;
-    }
-
-    /* =========================
-       FAN AVATAR
-    ========================= */
-
-    .fan-avatar {
-        position: relative;
-
-        z-index: 2;
-
-        width: 72px;
-
-        height: 72px;
-
-        border-radius: 50%;
-
-        object-fit: cover;
-
-        border: 2px solid rgba(140, 77, 255, 0.55);
-
-        box-shadow:
-            0 0 25px rgba(124, 60, 255, 0.25);
-
-        margin-bottom: 14px;
-
-        transition: 0.3s ease;
-    }
-
-    .fan-card:hover .fan-avatar {
-        transform: scale(1.06);
-
-        border-color: #9b63ff;
-
-        box-shadow:
-            0 0 35px rgba(124, 60, 255, 0.4);
-    }
-
-    /* =========================
-       FAN NAME
-    ========================= */
-
-    .fan-name {
-        position: relative;
-
-        z-index: 2;
-    }
-
-    .fan-name h3 {
-        font-size: 16px;
-
-        font-weight: 800;
-
-        color: white;
-    }
-
-    /* =========================
-       NO RESULTS
-    ========================= */
-
-    .no-results {
-        display: none;
-
-        text-align: center;
-
-        padding: 60px 20px;
-
-        color: #666;
-    }
-
-    .no-results i {
-        font-size: 35px;
-
-        color: #8c4dff;
-
-        margin-bottom: 15px;
-    }
-
-    .no-results h3 {
-        color: #aaa;
-
-        margin-bottom: 7px;
-    }
-
-    .no-results p {
-        font-size: 13px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-
-        padding: 35px 7%;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        color: #666;
-
-        font-size: 12px;
-
-        text-align: center;
-    }
-
-    /* =========================
-       ANIMATIONS
-    ========================= */
-
-    @keyframes fadeUp {
-
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(25px);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hanahx - Top Fans</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-    }
-
-    @keyframes heartFloat {
-
-        0%,
-        100% {
-            transform:
-                translateY(0);
+        html {
+            scroll-behavior: smooth;
         }
 
-        50% {
-            transform:
-                translateY(-3px);
+        body {
+            background: #050507;
+            color: white;
+            font-family: "Inter", Arial, sans-serif;
+            overflow-x: hidden;
         }
-    }
 
-    .fan-card:nth-child(1) {
-        animation-delay: .05s;
-    }
+        /* =========================
+           BACKGROUND
+        ========================= */
 
-    .fan-card:nth-child(2) {
-        animation-delay: .10s;
-    }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -3;
 
-    .fan-card:nth-child(3) {
-        animation-delay: .15s;
-    }
-
-    .fan-card:nth-child(4) {
-        animation-delay: .20s;
-    }
-
-    .fan-card:nth-child(5) {
-        animation-delay: .25s;
-    }
-
-    .fan-card:nth-child(6) {
-        animation-delay: .30s;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 850px) {
-
-        .fans-grid {
-            grid-template-columns:
-                repeat(2, 1fr);
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(120, 50, 255, 0.25),
+                    transparent 40%
+                ),
+                radial-gradient(
+                    circle at 0% 80%,
+                    rgba(80, 30, 200, 0.12),
+                    transparent 35%
+                ),
+                #050507;
         }
-    }
 
-    @media (max-width: 520px) {
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 999;
+
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
 
         .navbar {
-            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(5, 5, 7, 0.65);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+            z-index: 100;
         }
 
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #8c4dff;
+        }
+
+        .home-button {
+            padding: 11px 20px;
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            color: #aaa;
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+        .home-button:hover {
+            color: white;
+            background: rgba(124, 60, 255, 0.15);
+            border-color: rgba(140, 77, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
         .hero {
-            padding-left: 20px;
-            padding-right: 20px;
+            padding: 150px 20px 60px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: auto;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 13px;
+            border-radius: 999px;
+
+            background: rgba(124, 60, 255, 0.1);
+            border: 1px solid rgba(124, 60, 255, 0.25);
+
+            color: #c4a4ff;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        .eyebrow i {
+            color: #8c4dff;
         }
 
         .hero h1 {
-            letter-spacing: -3px;
+            font-size: clamp(45px, 8vw, 82px);
+            line-height: 0.95;
+            font-weight: 900;
+            letter-spacing: -4px;
+            margin-bottom: 20px;
         }
+
+        .hero h1 span {
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #9b63ff,
+                #d0b7ff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: #888;
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-container {
+            max-width: 700px;
+            margin: 35px auto 0;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            padding: 17px 20px;
+            border-radius: 14px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+
+            backdrop-filter: blur(12px);
+
+            transition: 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: rgba(140, 77, 255, 0.6);
+
+            box-shadow:
+                0 0 0 4px rgba(140, 77, 255, 0.08),
+                0 15px 50px rgba(124, 60, 255, 0.1);
+        }
+
+        .search-box i {
+            color: #777;
+            font-size: 17px;
+            margin-right: 12px;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+
+            background: transparent;
+            color: white;
+
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .search-box input::placeholder {
+            color: #666;
+        }
+
+        /* =========================
+           FANS SECTION
+        ========================= */
 
         .fans-section {
-            padding-left: 20px;
-            padding-right: 20px;
+            max-width: 1150px;
+            margin: auto;
+            padding: 40px 7% 130px;
         }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-header small {
+            color: #8c4dff;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .section-header h2 {
+            margin-top: 9px;
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+        }
+
+        .section-header p {
+            color: #777;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        /* =========================
+           FAN GRID
+        ========================= */
 
         .fans-grid {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
         }
-    }
 
-</style>
+        /* =========================
+           FAN CARD
+        ========================= */
+
+        .fan-card {
+            position: relative;
+
+            padding: 30px 25px;
+            min-height: 200px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.035);
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .fan-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 170px;
+            height: 170px;
+
+            right: -70px;
+            bottom: -90px;
+
+            background: #8c4dff;
+
+            filter: blur(70px);
+            opacity: 0;
+
+            transition: 0.4s ease;
+        }
+
+        .fan-card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(140, 77, 255, 0.45);
+
+            background: rgba(140, 77, 255, 0.07);
+        }
+
+        .fan-card:hover::before {
+            opacity: 0.25;
+        }
+
+        /* =========================
+           ONE HEART
+        ========================= */
+
+        .fan-heart {
+            position: relative;
+            z-index: 2;
+
+            color: #8c4dff;
+            font-size: 28px;
+
+            margin-bottom: 12px;
+
+            filter:
+                drop-shadow(
+                    0 0 7px
+                    rgba(140, 77, 255, 0.6)
+                );
+
+            animation: heartFloat 2s ease-in-out infinite;
+
+            transition: 0.25s ease;
+        }
+
+        .fan-card:hover .fan-heart {
+            color: #a875ff;
+            transform: scale(1.12);
+        }
+
+        /* =========================
+           FAN AVATAR
+        ========================= */
+
+        .fan-avatar {
+            position: relative;
+            z-index: 2;
+
+            width: 72px;
+            height: 72px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid rgba(140, 77, 255, 0.55);
+
+            box-shadow:
+                0 0 25px rgba(124, 60, 255, 0.25);
+
+            margin-bottom: 14px;
+
+            transition: 0.3s ease;
+        }
+
+        .fan-card:hover .fan-avatar {
+            transform: scale(1.06);
+
+            border-color: #9b63ff;
+
+            box-shadow:
+                0 0 35px rgba(124, 60, 255, 0.4);
+        }
+
+        /* =========================
+           FAN NAME
+        ========================= */
+
+        .fan-name {
+            position: relative;
+            z-index: 2;
+        }
+
+        .fan-name h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: white;
+        }
+
+        /* =========================
+           NO RESULTS
+        ========================= */
+
+        .no-results {
+            display: none;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            color: #666;
+        }
+
+        .no-results i {
+            font-size: 35px;
+            color: #8c4dff;
+            margin-bottom: 15px;
+        }
+
+        .no-results h3 {
+            color: #aaa;
+            margin-bottom: 7px;
+        }
+
+        .no-results p {
+            font-size: 13px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+            padding: 35px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #666;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================= */
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes heartFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+
+        }
+
+        .fan-card:nth-child(1) {
+            animation-delay: .05s;
+        }
+
+        .fan-card:nth-child(2) {
+            animation-delay: .10s;
+        }
+
+        .fan-card:nth-child(3) {
+            animation-delay: .15s;
+        }
+
+        .fan-card:nth-child(4) {
+            animation-delay: .20s;
+        }
+
+        .fan-card:nth-child(5) {
+            animation-delay: .25s;
+        }
+
+        .fan-card:nth-child(6) {
+            animation-delay: .30s;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .fans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 520px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .fans-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .fans-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-<!-- =========================
-     NAVBAR
-========================== -->
-
-<nav class="navbar">
-
-    <div class="logo">
-        hanah<span>.</span>
-    </div>
-
-    <a
-        class="home-button"
-        href="index.html"
-    >
-        <i class="fa-solid fa-house"></i>
-        Home
-    </a>
-
-</nav>
-
-
-<!-- =========================
-     HERO / SEARCH
-========================== -->
-
-<main>
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <div class="eyebrow">
-
-                <i class="fa-solid fa-heart"></i>
-
-                COMMUNITY
-
-            </div>
-
-            <h1>
-                <span>Top Fans</span>
-            </h1>
-
-            <p>
-                Discover members of the Hanahx community.
-                Search for a username below to find a fan.
-            </p>
-
-
-            <!-- SEARCH BAR -->
-
-            <div class="search-container">
-
-                <div class="search-box">
-
-                    <i class="fa-solid fa-magnifying-glass"></i>
-
-                    <input
-                        type="text"
-                        id="fanSearch"
-                        placeholder="Search for a username..."
-                        autocomplete="off"
-                    >
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
     <!-- =========================
-         FAN LIST
+         NAVBAR
     ========================== -->
 
-    <section class="fans-section">
+    <nav class="navbar">
 
-        <div class="section-header">
-
-            <small>HANAHX COMMUNITY</small>
-
-            <h2>Featured Fans</h2>
-
-            <p>
-                Some of the community members.
-            </p>
-
+        <div class="logo">
+            hanah<span>.</span>
         </div>
 
-
-        <div
-            class="fans-grid"
-            id="fansGrid"
+        <a
+            class="home-button"
+            href="index.html"
         >
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
 
-            <!-- FAN 1 -->
+    </nav>
 
-            <div
-                class="fan-card"
-                data-username="XxshadowgamerXx"
-            >
+    <!-- =========================
+         HERO / SEARCH
+    ========================== -->
 
-                <div class="fan-hearts">
+    <main>
 
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
                     <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-
+                    COMMUNITY
                 </div>
 
-                <img
-                    class="fan-avatar"
-                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-9B6A9BBDB5C8C4C6A9C1F8E3C7C1B4A2-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                    alt="XxshadowgamerXx"
-                >
+                <h1>
+                    <span>Top Fans</span>
+                </h1>
 
-                <div class="fan-name">
+                <p>
+                    Discover members of the Hanahx community.
+                    Search for a username below to find a fan.
+                </p>
 
-                    <h3>
-                        XxshadowgamerXx
-                    </h3>
+                <!-- SEARCH BAR -->
 
-                </div>
+                <div class="search-container">
 
-            </div>
+                    <div class="search-box">
 
+                        <i class="fa-solid fa-magnifying-glass"></i>
 
-            <!-- FAN 2 -->
+                        <input
+                            type="text"
+                            id="fanSearch"
+                            placeholder="Search for a username..."
+                            autocomplete="off"
+                        >
 
-            <div
-                class="fan-card"
-                data-username="PurpleRBLX"
-            >
-
-                <div class="fan-hearts">
-
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-
-                </div>
-
-                <img
-                    class="fan-avatar"
-                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-5D8B6E2D4C8F9A3B7E1D5C2A6F8B9C0D-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                    alt="PurpleRBLX"
-                >
-
-                <div class="fan-name">
-
-                    <h3>
-                        PurpleRBLX
-                    </h3>
+                    </div>
 
                 </div>
 
             </div>
 
+        </section>
 
-            <!-- FAN 3 -->
+        <!-- =========================
+             FAN LIST
+        ========================== -->
+
+        <section class="fans-section">
+
+            <div class="section-header">
+
+                <small>HANAHX COMMUNITY</small>
+
+                <h2>Featured Fans</h2>
+
+                <p>
+                    Some of the community members.
+                </p>
+
+            </div>
 
             <div
-                class="fan-card"
-                data-username="RobloxFan2026"
+                class="fans-grid"
+                id="fansGrid"
             >
 
-                <div class="fan-hearts">
+                <!-- FAN 1 -->
 
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
+                <div
+                    class="fan-card"
+                    data-username="XxshadowgamerXx"
+                >
+
+                    <!-- ONE HEART -->
+                    <i class="fa-solid fa-heart fan-heart"></i>
+
+                    <img
+                        class="fan-avatar"
+                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-9B6A9BBDB5C8C4C6A9C1F8E3C7C1B4A2-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="XxshadowgamerXx"
+                    >
+
+                    <div class="fan-name">
+                        <h3>XxshadowgamerXx</h3>
+                    </div>
 
                 </div>
 
-                <img
-                    class="fan-avatar"
-                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-7A9C2E5D1F6B8D3A4C7E9F2B5D6A8C1E-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                    alt="RobloxFan2026"
+                <!-- FAN 2 -->
+
+                <div
+                    class="fan-card"
+                    data-username="PurpleRBLX"
                 >
 
-                <div class="fan-name">
+                    <!-- ONE HEART -->
+                    <i class="fa-solid fa-heart fan-heart"></i>
 
-                    <h3>
-                        RobloxFan2026
-                    </h3>
+                    <img
+                        class="fan-avatar"
+                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-5D8B6E2D4C8F9A3B7E1D5C2A6F8B9C0D-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="PurpleRBLX"
+                    >
+
+                    <div class="fan-name">
+                        <h3>PurpleRBLX</h3>
+                    </div>
+
+                </div>
+
+                <!-- FAN 3 -->
+
+                <div
+                    class="fan-card"
+                    data-username="RobloxFan2026"
+                >
+
+                    <!-- ONE HEART -->
+                    <i class="fa-solid fa-heart fan-heart"></i>
+
+                    <img
+                        class="fan-avatar"
+                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-7A9C2E5D1F6B8D3A4C7E9F2B5D6A8C1E-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="RobloxFan2026"
+                    >
+
+                    <div class="fan-name">
+                        <h3>RobloxFan2026</h3>
+                    </div>
+
+                </div>
+
+                <!-- FAN 4 -->
+
+                <div
+                    class="fan-card"
+                    data-username="ShadowPlays"
+                >
+
+                    <!-- ONE HEART -->
+                    <i class="fa-solid fa-heart fan-heart"></i>
+
+                    <img
+                        class="fan-avatar"
+                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-3C7D9E2A5B8F1C4D6E9A3B7C2D5F8E1A-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="ShadowPlays"
+                    >
+
+                    <div class="fan-name">
+                        <h3>ShadowPlays</h3>
+                    </div>
+
+                </div>
+
+                <!-- FAN 5 -->
+
+                <div
+                    class="fan-card"
+                    data-username="HanahFanForever"
+                >
+
+                    <!-- ONE HEART -->
+                    <i class="fa-solid fa-heart fan-heart"></i>
+
+                    <img
+                        class="fan-avatar"
+                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-8C2D6A4F1B7E9C3D5A8F2B6E4C1D7A9-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="HanahFanForever"
+                    >
+
+                    <div class="fan-name">
+                        <h3>HanahFanForever</h3>
+                    </div>
+
+                </div>
+
+                <!-- FAN 6 -->
+
+                <div
+                    class="fan-card"
+                    data-username="VoidGamer"
+                >
+
+                    <!-- ONE HEART -->
+                    <i class="fa-solid fa-heart fan-heart"></i>
+
+                    <img
+                        class="fan-avatar"
+                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-4E8A1C6D3B9F2A7C5D1E8B4F6A3C9D2-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="VoidGamer"
+                    >
+
+                    <div class="fan-name">
+                        <h3>VoidGamer</h3>
+                    </div>
 
                 </div>
 
             </div>
 
-
-            <!-- FAN 4 -->
+            <!-- NO RESULTS -->
 
             <div
-                class="fan-card"
-                data-username="ShadowPlays"
+                class="no-results"
+                id="noResults"
             >
 
-                <div class="fan-hearts">
+                <i class="fa-solid fa-user-slash"></i>
 
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
+                <h3>
+                    No fans found
+                </h3>
 
-                </div>
-
-                <img
-                    class="fan-avatar"
-                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-3C7D9E2A5B8F1C4D6E9A3B7C2D5F8E1A-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                    alt="ShadowPlays"
-                >
-
-                <div class="fan-name">
-
-                    <h3>
-                        ShadowPlays
-                    </h3>
-
-                </div>
+                <p>
+                    Try searching for another username.
+                </p>
 
             </div>
 
+        </section>
 
-            <!-- FAN 5 -->
+    </main>
 
-            <div
-                class="fan-card"
-                data-username="HanahFanForever"
-            >
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
-                <div class="fan-hearts">
+    <footer>
+        © 2026 Hanahx. All rights reserved.
+    </footer>
 
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
+    <!-- =========================
+         SEARCH SCRIPT
+    ========================== -->
 
-                </div>
+    <script>
 
-                <img
-                    class="fan-avatar"
-                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-8C2D6A4F1B7E9C3D5A8F2B6E4C1D7A9-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                    alt="HanahFanForever"
-                >
+        const searchInput =
+            document.getElementById("fanSearch");
 
-                <div class="fan-name">
+        const fanCards =
+            document.querySelectorAll(".fan-card");
 
-                    <h3>
-                        HanahFanForever
-                    </h3>
+        const noResults =
+            document.getElementById("noResults");
 
-                </div>
+        searchInput.addEventListener(
+            "input",
+            function () {
 
-            </div>
+                const searchValue =
+                    this.value
+                        .toLowerCase()
+                        .trim();
 
+                let visibleCards = 0;
 
-            <!-- FAN 6 -->
+                fanCards.forEach(card => {
 
-            <div
-                class="fan-card"
-                data-username="VoidGamer"
-            >
+                    const username =
+                        card.dataset.username
+                            .toLowerCase();
 
-                <div class="fan-hearts">
+                    if (username.includes(searchValue)) {
 
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
+                        card.style.display = "flex";
+                        visibleCards++;
 
-                </div>
+                    } else {
 
-                <img
-                    class="fan-avatar"
-                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-4E8A1C6D3B9F2A7C5D1E8B4F6A3C9D2-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                    alt="VoidGamer"
-                >
+                        card.style.display = "none";
 
-                <div class="fan-name">
+                    }
 
-                    <h3>
-                        VoidGamer
-                    </h3>
+                });
 
-                </div>
+                if (visibleCards === 0) {
 
-            </div>
-
-        </div>
-
-
-        <!-- NO RESULTS -->
-
-        <div
-            class="no-results"
-            id="noResults"
-        >
-
-            <i class="fa-solid fa-user-slash"></i>
-
-            <h3>
-                No fans found
-            </h3>
-
-            <p>
-                Try searching for another username.
-            </p>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- =========================
-     FOOTER
-========================== -->
-
-<footer>
-
-    © 2026 Hanahx. All rights reserved.
-
-</footer>
-
-
-<!-- =========================
-     SEARCH SCRIPT
-========================== -->
-
-<script>
-
-    const searchInput =
-        document.getElementById("fanSearch");
-
-    const fanCards =
-        document.querySelectorAll(".fan-card");
-
-    const noResults =
-        document.getElementById("noResults");
-
-
-    searchInput.addEventListener(
-        "input",
-        function () {
-
-            const searchValue =
-                this.value
-                    .toLowerCase()
-                    .trim();
-
-            let visibleCards = 0;
-
-
-            fanCards.forEach(card => {
-
-                const username =
-                    card.dataset.username
-                        .toLowerCase();
-
-
-                if (
-                    username.includes(searchValue)
-                ) {
-
-                    card.style.display = "flex";
-
-                    visibleCards++;
+                    noResults.style.display = "block";
 
                 } else {
 
-                    card.style.display = "none";
+                    noResults.style.display = "none";
 
                 }
 
-            });
-
-
-            if (visibleCards === 0) {
-
-                noResults.style.display =
-                    "block";
-
-            } else {
-
-                noResults.style.display =
-                    "none";
-
             }
+        );
 
-        }
-    );
-
-</script>
+    </script>
 
 </body>
 
