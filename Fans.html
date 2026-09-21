@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Hanahx - Top Fans</title>
 
 <!-- Font Awesome -->
@@ -19,17 +17,20 @@
     rel="preconnect"
     href="https://fonts.googleapis.com"
 >
+
 <link
     rel="preconnect"
     href="https://fonts.gstatic.com"
     crossorigin
 >
+
 <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet"
 >
 
 <style>
+
     * {
         margin: 0;
         padding: 0;
@@ -63,11 +64,13 @@
                 rgba(120, 50, 255, 0.25),
                 transparent 40%
             ),
+
             radial-gradient(
                 circle at 0% 80%,
                 rgba(80, 30, 200, 0.12),
                 transparent 35%
             ),
+
             #050507;
     }
 
@@ -123,9 +126,11 @@
         border-radius: 10px;
 
         background: rgba(255, 255, 255, 0.05);
+
         border: 1px solid rgba(255, 255, 255, 0.08);
 
         color: #aaa;
+
         text-decoration: none;
 
         font-size: 13px;
@@ -136,7 +141,9 @@
 
     .home-button:hover {
         color: white;
+
         background: rgba(124, 60, 255, 0.15);
+
         border-color: rgba(140, 77, 255, 0.4);
 
         transform: translateY(-2px);
@@ -168,6 +175,7 @@
         border-radius: 999px;
 
         background: rgba(124, 60, 255, 0.1);
+
         border: 1px solid rgba(124, 60, 255, 0.25);
 
         color: #c4a4ff;
@@ -184,9 +192,11 @@
 
     .hero h1 {
         font-size: clamp(45px, 8vw, 82px);
+
         line-height: 0.95;
 
         font-weight: 900;
+
         letter-spacing: -4px;
 
         margin-bottom: 20px;
@@ -208,10 +218,13 @@
 
     .hero p {
         color: #888;
+
         font-size: 15px;
+
         line-height: 1.7;
 
         max-width: 600px;
+
         margin: auto;
     }
 
@@ -221,6 +234,7 @@
 
     .search-container {
         max-width: 700px;
+
         margin: 35px auto 0;
 
         position: relative;
@@ -230,6 +244,7 @@
         width: 100%;
 
         display: flex;
+
         align-items: center;
 
         padding: 17px 20px;
@@ -237,6 +252,7 @@
         border-radius: 14px;
 
         background: rgba(255, 255, 255, 0.045);
+
         border: 1px solid rgba(255, 255, 255, 0.09);
 
         backdrop-filter: blur(12px);
@@ -254,7 +270,9 @@
 
     .search-box i {
         color: #777;
+
         font-size: 17px;
+
         margin-right: 12px;
     }
 
@@ -262,6 +280,7 @@
         width: 100%;
 
         border: none;
+
         outline: none;
 
         background: transparent;
@@ -269,6 +288,7 @@
         color: white;
 
         font-family: inherit;
+
         font-size: 14px;
     }
 
@@ -290,6 +310,7 @@
 
     .section-header {
         text-align: center;
+
         margin-bottom: 35px;
     }
 
@@ -297,6 +318,7 @@
         color: #8c4dff;
 
         font-size: 11px;
+
         font-weight: 800;
 
         letter-spacing: 2px;
@@ -306,6 +328,7 @@
         margin-top: 9px;
 
         font-size: 34px;
+
         font-weight: 900;
 
         letter-spacing: -1.5px;
@@ -313,7 +336,9 @@
 
     .section-header p {
         color: #777;
+
         margin-top: 8px;
+
         font-size: 13px;
     }
 
@@ -337,9 +362,19 @@
     .fan-card {
         position: relative;
 
-        padding: 25px;
+        padding: 30px 25px;
 
-        min-height: 230px;
+        min-height: 200px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
 
         background: rgba(255, 255, 255, 0.035);
 
@@ -390,22 +425,57 @@
     }
 
     /* =========================
-       FAN AVATAR
+       HEARTS
     ========================= */
 
-    .fan-top {
+    .fan-hearts {
         position: relative;
+
         z-index: 2;
 
         display: flex;
-        align-items: center;
 
-        gap: 14px;
+        justify-content: center;
+
+        gap: 4px;
+
+        margin-bottom: 12px;
     }
 
+    .fan-hearts i {
+        color: #8c4dff;
+
+        font-size: 14px;
+
+        filter:
+            drop-shadow(
+                0 0 7px
+                rgba(140, 77, 255, 0.6)
+            );
+
+        animation: heartFloat 2s ease-in-out infinite;
+    }
+
+    .fan-hearts i:nth-child(2) {
+        animation-delay: 0.15s;
+    }
+
+    .fan-hearts i:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    /* =========================
+       FAN AVATAR
+    ========================= */
+
     .fan-avatar {
-        width: 58px;
-        height: 58px;
+        position: relative;
+
+        z-index: 2;
+
+        width: 72px;
+
+        height: 72px;
 
         border-radius: 50%;
 
@@ -414,85 +484,38 @@
         border: 2px solid rgba(140, 77, 255, 0.55);
 
         box-shadow:
-            0 0 25px rgba(124, 60, 255, 0.2);
+            0 0 25px rgba(124, 60, 255, 0.25);
+
+        margin-bottom: 14px;
+
+        transition: 0.3s ease;
     }
 
+    .fan-card:hover .fan-avatar {
+        transform: scale(1.06);
+
+        border-color: #9b63ff;
+
+        box-shadow:
+            0 0 35px rgba(124, 60, 255, 0.4);
+    }
+
+    /* =========================
+       FAN NAME
+    ========================= */
+
     .fan-name {
-        min-width: 0;
+        position: relative;
+
+        z-index: 2;
     }
 
     .fan-name h3 {
         font-size: 16px;
+
         font-weight: 800;
 
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .fan-name span {
-        display: inline-flex;
-
-        margin-top: 5px;
-
-        padding: 4px 8px;
-
-        border-radius: 6px;
-
-        background: rgba(124, 60, 255, 0.1);
-
-        color: #ae89ff;
-
-        font-size: 10px;
-        font-weight: 700;
-    }
-
-    .fan-description {
-        position: relative;
-        z-index: 2;
-
-        color: #777;
-
-        font-size: 12px;
-
-        line-height: 1.6;
-
-        margin-top: 22px;
-    }
-
-    .fan-footer {
-        position: relative;
-        z-index: 2;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        margin-top: 20px;
-
-        padding-top: 15px;
-
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .fan-footer span {
-        color: #555;
-        font-size: 10px;
-    }
-
-    .fan-profile {
-        color: #999;
-
-        text-decoration: none;
-
-        font-size: 11px;
-        font-weight: 700;
-
-        transition: 0.2s ease;
-    }
-
-    .fan-profile:hover {
-        color: #b894ff;
+        color: white;
     }
 
     /* =========================
@@ -519,6 +542,7 @@
 
     .no-results h3 {
         color: #aaa;
+
         margin-bottom: 7px;
     }
 
@@ -536,7 +560,9 @@
         padding: 35px 7%;
 
         display: flex;
+
         align-items: center;
+
         justify-content: center;
 
         color: #666;
@@ -551,14 +577,33 @@
     ========================= */
 
     @keyframes fadeUp {
+
         from {
             opacity: 0;
-            transform: translateY(25px);
+
+            transform:
+                translateY(25px);
         }
 
         to {
             opacity: 1;
-            transform: translateY(0);
+
+            transform:
+                translateY(0);
+        }
+    }
+
+    @keyframes heartFloat {
+
+        0%,
+        100% {
+            transform:
+                translateY(0);
+        }
+
+        50% {
+            transform:
+                translateY(-3px);
         }
     }
 
@@ -593,7 +638,8 @@
     @media (max-width: 850px) {
 
         .fans-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns:
+                repeat(2, 1fr);
         }
     }
 
@@ -621,14 +667,13 @@
             grid-template-columns: 1fr;
         }
     }
+
 </style>
-```
 
 </head>
 
 <body>
 
-```
 <!-- =========================
      NAVBAR
 ========================== -->
@@ -661,8 +706,11 @@
         <div class="hero-content">
 
             <div class="eyebrow">
-                <i class="fa-solid fa-users"></i>
+
+                <i class="fa-solid fa-heart"></i>
+
                 COMMUNITY
+
             </div>
 
             <h1>
@@ -673,6 +721,7 @@
                 Discover members of the Hanahx community.
                 Search for a username below to find a fan.
             </p>
+
 
             <!-- SEARCH BAR -->
 
@@ -717,7 +766,10 @@
         </div>
 
 
-        <div class="fans-grid" id="fansGrid">
+        <div
+            class="fans-grid"
+            id="fansGrid"
+        >
 
             <!-- FAN 1 -->
 
@@ -726,41 +778,25 @@
                 data-username="XxshadowgamerXx"
             >
 
-                <div class="fan-top">
+                <div class="fan-hearts">
 
-                    <img
-                        class="fan-avatar"
-                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-9B6A9BBDB5C8C4C6A9C1F8E3C7C1B4A2-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                        alt="XxshadowgamerXx"
-                    >
-
-                    <div class="fan-name">
-
-                        <h3>XxshadowgamerXx</h3>
-
-                        <span>
-                            TOP FAN
-                        </span>
-
-                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
 
                 </div>
 
-                
+                <img
+                    class="fan-avatar"
+                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-9B6A9BBDB5C8C4C6A9C1F8E3C7C1B4A2-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                    alt="XxshadowgamerXx"
+                >
 
-                <div class="fan-footer">
+                <div class="fan-name">
 
-                    <span>
-                        <i class="fa-solid fa-heart"></i>
-                        Community member
-                    </span>
-
-                    <a
-                        class="fan-profile"
-                        href="#"
-                    >
-                        View Profile →
-                    </a>
+                    <h3>
+                        XxshadowgamerXx
+                    </h3>
 
                 </div>
 
@@ -774,41 +810,25 @@
                 data-username="PurpleRBLX"
             >
 
-                <div class="fan-top">
+                <div class="fan-hearts">
 
-                    <img
-                        class="fan-avatar"
-                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-5D8B6E2D4C8F9A3B7E1D5C2A6F8B9C0D-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                        alt="PurpleRBLX"
-                    >
-
-                    <div class="fan-name">
-
-                        <h3>PurpleRBLX</h3>
-
-                        <span>
-                            SUPPORTER
-                        </span>
-
-                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
 
                 </div>
 
-                
+                <img
+                    class="fan-avatar"
+                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-5D8B6E2D4C8F9A3B7E1D5C2A6F8B9C0D-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                    alt="PurpleRBLX"
+                >
 
-                <div class="fan-footer">
+                <div class="fan-name">
 
-                    <span>
-                        <i class="fa-solid fa-star"></i>
-                        Active fan
-                    </span>
-
-                    <a
-                        class="fan-profile"
-                        href="#"
-                    >
-                        View Profile →
-                    </a>
+                    <h3>
+                        PurpleRBLX
+                    </h3>
 
                 </div>
 
@@ -822,41 +842,25 @@
                 data-username="RobloxFan2026"
             >
 
-                <div class="fan-top">
+                <div class="fan-hearts">
 
-                    <img
-                        class="fan-avatar"
-                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-7A9C2E5D1F6B8D3A4C7E9F2B5D6A8C1E-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                        alt="RobloxFan2026"
-                    >
-
-                    <div class="fan-name">
-
-                        <h3>RobloxFan2026</h3>
-
-                        <span>
-                            FAN
-                        </span>
-
-                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
 
                 </div>
 
-                
+                <img
+                    class="fan-avatar"
+                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-7A9C2E5D1F6B8D3A4C7E9F2B5D6A8C1E-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                    alt="RobloxFan2026"
+                >
 
-                <div class="fan-footer">
+                <div class="fan-name">
 
-                    <span>
-                        <i class="fa-solid fa-gamepad"></i>
-                        Roblox
-                    </span>
-
-                    <a
-                        class="fan-profile"
-                        href="#"
-                    >
-                        View Profile →
-                    </a>
+                    <h3>
+                        RobloxFan2026
+                    </h3>
 
                 </div>
 
@@ -870,41 +874,25 @@
                 data-username="ShadowPlays"
             >
 
-                <div class="fan-top">
+                <div class="fan-hearts">
 
-                    <img
-                        class="fan-avatar"
-                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-3C7D9E2A5B8F1C4D6E9A3B7C2D5F8E1A-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                        alt="ShadowPlays"
-                    >
-
-                    <div class="fan-name">
-
-                        <h3>ShadowPlays</h3>
-
-                        <span>
-                            FAN
-                        </span>
-
-                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
 
                 </div>
 
-                
+                <img
+                    class="fan-avatar"
+                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-3C7D9E2A5B8F1C4D6E9A3B7C2D5F8E1A-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                    alt="ShadowPlays"
+                >
 
-                <div class="fan-footer">
+                <div class="fan-name">
 
-                    <span>
-                        <i class="fa-solid fa-play"></i>
-                        Viewer
-                    </span>
-
-                    <a
-                        class="fan-profile"
-                        href="#"
-                    >
-                        View Profile →
-                    </a>
+                    <h3>
+                        ShadowPlays
+                    </h3>
 
                 </div>
 
@@ -918,41 +906,25 @@
                 data-username="HanahFanForever"
             >
 
-                <div class="fan-top">
+                <div class="fan-hearts">
 
-                    <img
-                        class="fan-avatar"
-                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-8C2D6A4F1B7E9C3D5A8F2B6E4C1D7A9-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                        alt="HanahFanForever"
-                    >
-
-                    <div class="fan-name">
-
-                        <h3>HanahFanForever</h3>
-
-                        <span>
-                            SUPPORTER
-                        </span>
-
-                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
 
                 </div>
 
-                
+                <img
+                    class="fan-avatar"
+                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-8C2D6A4F1B7E9C3D5A8F2B6E4C1D7A9-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                    alt="HanahFanForever"
+                >
 
-                <div class="fan-footer">
+                <div class="fan-name">
 
-                    <span>
-                        <i class="fa-solid fa-heart"></i>
-                        Supporter
-                    </span>
-
-                    <a
-                        class="fan-profile"
-                        href="#"
-                    >
-                        View Profile →
-                    </a>
+                    <h3>
+                        HanahFanForever
+                    </h3>
 
                 </div>
 
@@ -966,41 +938,25 @@
                 data-username="VoidGamer"
             >
 
-                <div class="fan-top">
+                <div class="fan-hearts">
 
-                    <img
-                        class="fan-avatar"
-                        src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-4E8A1C6D3B9F2A7C5D1E8B4F6A3C9D2-Png/150/150/AvatarHeadshot/Webp/noFilter"
-                        alt="VoidGamer"
-                    >
-
-                    <div class="fan-name">
-
-                        <h3>VoidGamer</h3>
-
-                        <span>
-                            COMMUNITY
-                        </span>
-
-                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
 
                 </div>
 
-                
+                <img
+                    class="fan-avatar"
+                    src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-4E8A1C6D3B9F2A7C5D1E8B4F6A3C9D2-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                    alt="VoidGamer"
+                >
 
-                <div class="fan-footer">
+                <div class="fan-name">
 
-                    <span>
-                        <i class="fa-solid fa-users"></i>
-                        Member
-                    </span>
-
-                    <a
-                        class="fan-profile"
-                        href="#"
-                    >
-                        View Profile →
-                    </a>
+                    <h3>
+                        VoidGamer
+                    </h3>
 
                 </div>
 
@@ -1018,7 +974,9 @@
 
             <i class="fa-solid fa-user-slash"></i>
 
-            <h3>No fans found</h3>
+            <h3>
+                No fans found
+            </h3>
 
             <p>
                 Try searching for another username.
@@ -1048,57 +1006,69 @@
 
 <script>
 
-    const searchInput = document.getElementById("fanSearch");
+    const searchInput =
+        document.getElementById("fanSearch");
 
-    const fanCards = document.querySelectorAll(".fan-card");
+    const fanCards =
+        document.querySelectorAll(".fan-card");
 
-    const noResults = document.getElementById("noResults");
-
-
-    searchInput.addEventListener("input", function () {
-
-        const searchValue =
-            this.value
-                .toLowerCase()
-                .trim();
-
-        let visibleCards = 0;
+    const noResults =
+        document.getElementById("noResults");
 
 
-        fanCards.forEach(card => {
+    searchInput.addEventListener(
+        "input",
+        function () {
 
-            const username =
-                card.dataset.username.toLowerCase();
+            const searchValue =
+                this.value
+                    .toLowerCase()
+                    .trim();
 
-            if (username.includes(searchValue)) {
+            let visibleCards = 0;
 
-                card.style.display = "block";
 
-                visibleCards++;
+            fanCards.forEach(card => {
+
+                const username =
+                    card.dataset.username
+                        .toLowerCase();
+
+
+                if (
+                    username.includes(searchValue)
+                ) {
+
+                    card.style.display = "flex";
+
+                    visibleCards++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            if (visibleCards === 0) {
+
+                noResults.style.display =
+                    "block";
 
             } else {
 
-                card.style.display = "none";
+                noResults.style.display =
+                    "none";
 
             }
 
-        });
-
-
-        if (visibleCards === 0) {
-
-            noResults.style.display = "block";
-
-        } else {
-
-            noResults.style.display = "none";
-
         }
-
-    });
+    );
 
 </script>
-```
 
 </body>
+
 </html>
