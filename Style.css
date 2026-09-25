@@ -13,3 +13,11 @@
 .fan-card:hover .fan-heart {
     transform: scale(1.12);
 }
+
+.social-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
