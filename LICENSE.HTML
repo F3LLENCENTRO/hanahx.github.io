@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Hanahx - MIT License</title>
+
+<!-- Font Awesome -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<!-- Google Font -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: #030408;
+        color: white;
+        font-family: "Inter", Arial, sans-serif;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+
+    /* =========================================================
+       ANIMATED BACKGROUND
+    ========================================================= */
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+
+        background:
+            radial-gradient(
+                circle at 50% 0%,
+                rgba(255, 105, 180, 0.13),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                circle at 0% 80%,
+                rgba(0, 140, 255, 0.10),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                circle at 100% 60%,
+                rgba(255, 220, 40, 0.07),
+                transparent 30%
+            ),
+
+            #030408;
+    }
+
+
+    .color-orb {
+        position: fixed;
+
+        width: 420px;
+        height: 420px;
+
+        border-radius: 50%;
+
+        pointer-events: none;
+
+        filter: blur(90px);
+
+        opacity: 0.24;
+
+        z-index: -5;
+
+        mix-blend-mode: screen;
+
+        will-change: transform;
+    }
+
+
+    .sakura-orb {
+        background:
+            radial-gradient(
+                circle,
+                rgba(255, 105, 180, 0.95),
+                rgba(255, 70, 160, 0.35),
+                transparent 70%
+            );
+    }
+
+
+    .yellow-orb {
+        background:
+            radial-gradient(
+                circle,
+                rgba(255, 230, 55, 0.95),
+                rgba(255, 190, 0, 0.35),
+                transparent 70%
+            );
+    }
+
+
+    .blue-orb {
+        background:
+            radial-gradient(
+                circle,
+                rgba(30, 150, 255, 0.95),
+                rgba(0, 90, 255, 0.35),
+                transparent 70%
+            );
+    }
+
+
+    /* =========================================================
+       GRAIN
+    ========================================================= */
+
+    body::after {
+        content: "";
+
+        position: fixed;
+        inset: 0;
+
+        pointer-events: none;
+
+        z-index: 999;
+
+        opacity: 0.045;
+
+        background-image:
+            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
+    }
+
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    .navbar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 75px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 15px;
+
+        padding: 0 5%;
+
+        background: rgba(3, 4, 8, 0.66);
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+
+        border-bottom:
+            1px solid rgba(255,255,255,0.07);
+
+        z-index: 100;
+    }
+
+
+    .logo {
+        font-size: 22px;
+        font-weight: 900;
+        letter-spacing: -1px;
+    }
+
+
+    .logo span {
+        color: #ff69b4;
+
+        text-shadow:
+            0 0 15px rgba(255,105,180,0.8);
+    }
+
+
+    .nav-links {
+        display: flex;
+
+        gap: 30px;
+
+        list-style: none;
+
+        margin-left: auto;
+    }
+
+
+    .nav-links a {
+        color: #aaa;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        transition: 0.25s ease;
+    }
+
+
+    .nav-links a:hover {
+        color: white;
+
+        text-shadow:
+            0 0 15px rgba(255,255,255,0.35);
+    }
+
+
+    .nav-button {
+        padding: 11px 18px;
+
+        border-radius: 10px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #ff5ca8,
+                #8f65ff,
+                #249cff
+            );
+
+        background-size: 200% 200%;
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        transition: 0.3s ease;
+
+        animation:
+            buttonGradient 6s ease infinite;
+    }
+
+
+    .nav-button:hover {
+        transform:
+            translateY(-2px)
+            scale(1.02);
+
+        box-shadow:
+            0 10px 35px rgba(255,105,180,0.22),
+            0 0 25px rgba(40,150,255,0.15);
+    }
+
+
+    @keyframes buttonGradient {
+
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+
+    }
+
+
+    /* =========================================================
+       MENU BUTTON
+    ========================================================= */
+
+    .menu-button {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        flex: 0 0 42px;
+
+        width: 42px;
+        height: 42px;
+
+        padding: 0;
+
+        border:
+            1px solid rgba(255,255,255,0.10);
+
+        border-radius: 11px;
+
+        background:
+            rgba(255,255,255,0.045);
+
+        color: white;
+
+        cursor: pointer;
+
+        font-size: 18px;
+
+        transition: 0.25s ease;
+
+        z-index: 101;
+    }
+
+
+    .menu-button:hover {
+        background:
+            rgba(255,105,180,0.12);
+
+        border-color:
+            rgba(255,105,180,0.45);
+
+        color: #ff9acb;
+
+        transform:
+            translateY(-1px);
+    }
+
+
+    .menu-button:active {
+        transform: scale(0.94);
+    }
+
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+
+        background:
+            rgba(0,0,0,0.72);
+
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+
+        z-index: 1000;
+    }
+
+
+    .sidebar-overlay.active {
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+    }
+
+
+    .sidebar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: min(320px, 85vw);
+
+        height: 100vh;
+        height: 100dvh;
+
+        padding: 24px 20px;
+
+        background:
+            radial-gradient(
+                circle at 0% 0%,
+                rgba(255,105,180,0.15),
+                transparent 32%
+            ),
+
+            radial-gradient(
+                circle at 100% 100%,
+                rgba(0,140,255,0.08),
+                transparent 35%
+            ),
+
+            #07080d;
+
+        border-right:
+            1px solid rgba(255,105,180,0.20);
+
+        box-shadow:
+            20px 0 70px rgba(0,0,0,0.65);
+
+        transform:
+            translateX(-105%);
+
+        transition:
+            transform 0.35s
+            cubic-bezier(.77,0,.18,1);
+
+        z-index: 1001;
+
+        display: flex;
+
+        flex-direction: column;
+
+        overflow-y: auto;
+    }
+
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+
+    .sidebar-header {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding-bottom: 22px;
+
+        border-bottom:
+            1px solid rgba(255,255,255,0.07);
+    }
+
+
+    .sidebar-logo {
+        font-size: 22px;
+
+        font-weight: 900;
+
+        letter-spacing: -1px;
+    }
+
+
+    .sidebar-logo span {
+        color: #ff69b4;
+    }
+
+
+    .sidebar-close {
+        width: 40px;
+        height: 40px;
+
+        border:
+            1px solid rgba(255,255,255,0.08);
+
+        border-radius: 10px;
+
+        background:
+            rgba(255,255,255,0.05);
+
+        color: white;
+
+        font-size: 17px;
+
+        cursor: pointer;
+
+        transition: 0.25s ease;
+    }
+
+
+    .sidebar-close:hover {
+        background:
+            rgba(255,70,120,0.12);
+
+        border-color:
+            rgba(255,105,180,0.35);
+
+        color: #ff8fc5;
+    }
+
+
+    .sidebar-links {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        margin-top: 25px;
+    }
+
+
+    .sidebar-links a {
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+
+        padding: 14px 15px;
+
+        border-radius: 11px;
+
+        color: #aaa;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        transition: 0.25s ease;
+    }
+
+
+    .sidebar-links a i {
+        width: 20px;
+
+        text-align: center;
+
+        transition: 0.25s ease;
+    }
+
+
+    .sidebar-links a:hover {
+        color: white;
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(255,105,180,0.12),
+                rgba(30,150,255,0.07)
+            );
+
+        transform:
+            translateX(4px);
+    }
+
+
+    .sidebar-links a:hover i {
+        color: #ff79b9;
+
+        transform:
+            scale(1.1);
+    }
+
+
+    .sidebar-subscribe {
+        margin-top: auto;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 9px;
+
+        padding: 13px;
+
+        border-radius: 11px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #ff5ca8,
+                #8d65ff,
+                #249cff
+            );
+
+        background-size: 200% 200%;
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        transition: 0.25s ease;
+
+        animation:
+            buttonGradient 6s ease infinite;
+    }
+
+
+    .sidebar-subscribe:hover {
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 10px 30px
+            rgba(255,105,180,0.2);
+    }
+
+
+    /* =========================================================
+       LICENSE PAGE
+    ========================================================= */
+
+    .license-page {
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding:
+            145px 20px 80px;
+    }
+
+
+    .license-container {
+        width: min(1000px, 100%);
+
+        margin: auto;
+
+        animation:
+            fadeUp 0.8s ease forwards;
+    }
+
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .license-header {
+        text-align: center;
+
+        margin-bottom: 40px;
+    }
+
+
+    .license-badge {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding:
+            8px 14px;
+
+        border-radius: 999px;
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(255,105,180,0.09),
+                rgba(255,220,50,0.06),
+                rgba(30,150,255,0.08)
+            );
+
+        border:
+            1px solid
+            rgba(255,255,255,0.10);
+
+        color: #e5e5e5;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        margin-bottom: 18px;
+    }
+
+
+    .license-badge i {
+        color: #ff79b9;
+
+        text-shadow:
+            0 0 15px
+            rgba(255,105,180,0.7);
+    }
+
+
+    .license-header h1 {
+        font-size:
+            clamp(42px, 7vw, 72px);
+
+        line-height: 1;
+
+        font-weight: 900;
+
+        letter-spacing: -4px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .license-header h1 span {
+        background:
+            linear-gradient(
+                90deg,
+                #ff70b5,
+                #ffd92f,
+                #39aaff,
+                #ff70b5
+            );
+
+        background-size: 300% 100%;
+
+        -webkit-background-clip: text;
+
+        background-clip: text;
+
+        color: transparent;
+
+        animation:
+            rainbowFlow 7s ease-in-out infinite;
+    }
+
+
+    .license-header p {
+        max-width: 650px;
+
+        margin: auto;
+
+        color: #888;
+
+        line-height: 1.7;
+
+        font-size: 15px;
+    }
+
+
+    @keyframes rainbowFlow {
+
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+
+    }
+
+
+    /* =========================================================
+       LICENSE CARD
+    ========================================================= */
+
+    .license-card {
+        position: relative;
+
+        overflow: hidden;
+
+        background:
+            rgba(255,255,255,0.035);
+
+        border:
+            1px solid
+            rgba(255,255,255,0.08);
+
+        border-radius: 20px;
+
+        padding: 38px;
+
+        box-shadow:
+            0 20px 70px
+            rgba(0,0,0,0.30);
+
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+
+
+    .license-card::before {
+        content: "";
+
+        position: absolute;
+
+        width: 350px;
+        height: 350px;
+
+        right: -150px;
+        top: -180px;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(255,105,180,0.15),
+                transparent 70%
+            );
+
+        filter: blur(25px);
+
+        pointer-events: none;
+    }
+
+
+    .license-card::after {
+        content: "";
+
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        left: -160px;
+        bottom: -180px;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(30,150,255,0.10),
+                transparent 70%
+            );
+
+        filter: blur(25px);
+
+        pointer-events: none;
+    }
+
+
+    .license-top {
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 20px;
+
+        padding-bottom: 25px;
+
+        margin-bottom: 25px;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,0.07);
+    }
+
+
+    .license-title {
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+    }
+
+
+    .license-icon {
+        width: 52px;
+        height: 52px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 14px;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(255,105,180,0.18),
+                rgba(30,150,255,0.13)
+            );
+
+        border:
+            1px solid
+            rgba(255,255,255,0.09);
+
+        color: #ff8bc3;
+
+        font-size: 22px;
+
+        box-shadow:
+            0 0 30px
+            rgba(255,105,180,0.08);
+    }
+
+
+    .license-title h2 {
+        font-size: 21px;
+
+        margin-bottom: 4px;
+    }
+
+
+    .license-title p {
+        color: #777;
+
+        font-size: 12px;
+    }
+
+
+    .license-tag {
+        padding:
+            8px 12px;
+
+        border-radius: 8px;
+
+        background:
+            rgba(255,255,255,0.05);
+
+        border:
+            1px solid
+            rgba(255,255,255,0.08);
+
+        color: #aaa;
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        white-space: nowrap;
+    }
+
+
+    /* =========================================================
+       LICENSE TEXT
+    ========================================================= */
+
+    .license-text {
+        position: relative;
+
+        z-index: 2;
+
+        color: #bdbdbd;
+
+        font-size: 14px;
+
+        line-height: 1.8;
+    }
+
+
+    .license-text .copyright {
+        color: white;
+
+        font-weight: 700;
+
+        margin-bottom: 25px;
+    }
+
+
+    .license-text p {
+        margin-bottom: 20px;
+    }
+
+
+    .license-text .permission {
+        color: #e8e8e8;
+
+        font-weight: 600;
+
+        margin-top: 28px;
+    }
+
+
+    .license-text .warning {
+        color: #999;
+
+        font-size: 13px;
+
+        margin-top: 25px;
+    }
+
+
+    .license-text strong {
+        color: white;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+        border-top:
+            1px solid
+            rgba(255,255,255,0.06);
+
+        padding:
+            35px 7%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        color: #666;
+
+        font-size: 12px;
+    }
+
+
+    .footer-socials {
+        display: flex;
+
+        gap: 15px;
+    }
+
+
+    .footer-socials a {
+        color: #777;
+
+        text-decoration: none;
+
+        transition: 0.2s ease;
+    }
+
+
+    .footer-socials a:hover {
+        color: #ff8bc3;
+
+        text-shadow:
+            0 0 15px
+            rgba(255,105,180,0.45);
+    }
+
+
+    /* =========================================================
+       ANIMATION
+    ========================================================= */
+
+    @keyframes fadeUp {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    /* =========================================================
+       PC
+    ========================================================= */
+
+    @media (min-width: 851px) {
+
+        .navbar {
+            padding: 0 5%;
+        }
+
+        .menu-button {
+            order: 1;
+        }
+
+        .navbar .logo {
+            order: 2;
+        }
+
+        .navbar .nav-links {
+            order: 3;
+        }
+
+        .navbar .nav-button {
+            order: 4;
+        }
+
+    }
+
+
+    /* =========================================================
+       TABLET / IPAD
+    ========================================================= */
+
+    @media (max-width: 850px) {
+
+        .navbar {
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: none !important;
+        }
+
+        .navbar .nav-button {
+            margin-left: auto;
+        }
+
+        .license-card {
+            padding: 30px;
+        }
+
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 520px) {
+
+        .navbar {
+            padding: 0 15px;
+
+            gap: 10px;
+        }
+
+
+        .menu-button {
+            width: 40px;
+            height: 40px;
+
+            flex-basis: 40px;
+        }
+
+
+        .logo {
+            font-size: 20px;
+        }
+
+
+        .nav-button {
+            padding:
+                10px 13px;
+
+            font-size: 12px;
+        }
+
+
+        .license-page {
+            padding:
+                125px 15px 60px;
+        }
+
+
+        .license-header h1 {
+            letter-spacing: -3px;
+        }
+
+
+        .license-card {
+            padding: 22px;
+
+            border-radius: 16px;
+        }
+
+
+        .license-top {
+            align-items: flex-start;
+
+            flex-direction: column;
+        }
+
+
+        .license-tag {
+            align-self: flex-start;
+        }
+
+
+        .license-text {
+            font-size: 13px;
+
+            line-height: 1.75;
+        }
+
+
+        footer {
+            flex-direction: column;
+
+            gap: 20px;
+
+            text-align: center;
+        }
+
+
+        .color-orb {
+            width: 280px;
+            height: 280px;
+
+            filter: blur(70px);
+
+            opacity: 0.20;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =========================================================
+     MOVING COLOR LIGHTS
+========================================================== -->
+
+<div
+    class="color-orb sakura-orb"
+    id="sakuraOrb">
+</div>
+
+<div
+    class="color-orb yellow-orb"
+    id="yellowOrb">
+</div>
+
+<div
+    class="color-orb blue-orb"
+    id="blueOrb">
+</div>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================== -->
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay">
+</div>
+
+
+<aside
+    class="sidebar"
+    id="sidebar">
+
+    <div class="sidebar-header">
+
+        <div class="sidebar-logo">
+            hanah<span>.</span>
+        </div>
+
+        <button
+            class="sidebar-close"
+            id="sidebarClose"
+            aria-label="Close menu">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <nav class="sidebar-links">
+
+        <a href="./index.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Home</span>
+
+        </a>
+
+
+        <a href="./index.html#socials">
+
+            <i class="fa-solid fa-share-nodes"></i>
+
+            <span>Socials</span>
+
+        </a>
+
+
+        <a href="./index.html#youtube">
+
+            <i class="fa-brands fa-youtube"></i>
+
+            <span>YouTube</span>
+
+        </a>
+
+
+        <a href="./Fans.html">
+
+            <i class="fa-solid fa-heart"></i>
+
+            <span>Top Fans!</span>
+
+        </a>
+
+
+        <a href="./license.html">
+
+            <i class="fa-solid fa-scale-balanced"></i>
+
+            <span>License</span>
+
+        </a>
+
+    </nav>
+
+
+    <a
+        class="sidebar-subscribe"
+        href="https://www.youtube.com/@HanahxYoutube"
+        target="_blank">
+
+        <i class="fa-brands fa-youtube"></i>
+
+        Subscribe
+
+    </a>
+
+</aside>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
+
+<nav class="navbar">
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open menu"
+        aria-expanded="false">
+
+        <i class="fa-solid fa-bars"></i>
+
+    </button>
+
+
+    <div class="logo">
+        hanah<span>.</span>
+    </div>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="./index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="./index.html#socials">
+                Socials
+            </a>
+        </li>
+
+        <li>
+            <a href="./index.html#youtube">
+                YouTube
+            </a>
+        </li>
+
+        <li>
+            <a href="./Fans.html">
+                Top Fans!
+            </a>
+        </li>
+
+    </ul>
+
+
+    <a
+        class="nav-button"
+        href="https://www.youtube.com/@HanahxYoutube"
+        target="_blank">
+
+        Subscribe
+
+    </a>
+
+</nav>
+
+
+<!-- =========================================================
+     LICENSE
+========================================================== -->
+
+<main class="license-page">
+
+    <div class="license-container">
+
+
+        <header class="license-header">
+
+            <div class="license-badge">
+
+                <i class="fa-solid fa-scale-balanced"></i>
+
+                OPEN SOURCE LICENSE
+
+            </div>
+
+
+            <h1>
+                <span>MIT License</span>
+            </h1>
+
+
+            <p>
+                This page explains the license that applies to
+                the applicable open-source code and materials
+                associated with this website.
+            </p>
+
+        </header>
+
+
+        <section class="license-card">
+
+
+            <div class="license-top">
+
+                <div class="license-title">
+
+                    <div class="license-icon">
+
+                        <i class="fa-brands fa-github"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2>
+                            MIT License
+                        </h2>
+
+                        <p>
+                            Simple and permissive open-source licensing
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="license-tag">
+                    SPDX: MIT
+                </div>
+
+            </div>
+
+
+            <div class="license-text">
+
+                <div class="copyright">
+                    Copyright © 2026 Hanahx
+                </div>
+
+
+                <p class="permission">
+                    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.
+                </p>
+
+
+                <p>
+                    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+                </p>
+
+
+                <p>
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+                </p>
+
+
+                <p>
+                    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                </p>
+
+
+                <p class="warning">
+                    This license applies only to material that is actually distributed under the MIT License. Third-party services, trademarks, logos, images, and other separately licensed materials remain subject to their respective terms and licenses.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer>
+
+    <span>
+        © 2026 Hanahx. All rights reserved.
+    </span>
+
+
+    <div class="footer-socials">
+
+        <a
+            href="https://www.youtube.com/@HanahxYoutube"
+            target="_blank">
+
+            <i class="fa-brands fa-youtube"></i>
+
+        </a>
+
+
+        <a
+            href="https://instagram.com/yourgirlhanahx"
+            target="_blank">
+
+            <i class="fa-brands fa-instagram"></i>
+
+        </a>
+
+
+        <a
+            href="https://tiktok.com/@yourgirlhanahx"
+            target="_blank">
+
+            <i class="fa-brands fa-tiktok"></i>
+
+        </a>
+
+
+        <a
+            href="https://discord.gg/Hq4cXTWCWh"
+            target="_blank">
+
+            <i class="fa-brands fa-discord"></i>
+
+        </a>
+
+
+        <a
+            href="https://roblox.com/users/4418117813/profile"
+            target="_blank">
+
+            <i class="fa-solid fa-cube"></i>
+
+        </a>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script>
+
+    /* =====================================================
+       SIDEBAR
+    ====================================================== */
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const sidebarClose =
+        document.getElementById("sidebarClose");
+
+    const sidebarOverlay =
+        document.getElementById("sidebarOverlay");
+
+
+    function openSidebar() {
+
+        sidebar.classList.add("active");
+
+        sidebarOverlay.classList.add("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeSidebar() {
+
+        sidebar.classList.remove("active");
+
+        sidebarOverlay.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    menuButton.addEventListener(
+        "click",
+        openSidebar
+    );
+
+
+    sidebarClose.addEventListener(
+        "click",
+        closeSidebar
+    );
+
+
+    sidebarOverlay.addEventListener(
+        "click",
+        closeSidebar
+    );
+
+
+    document
+        .querySelectorAll(".sidebar-links a")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                closeSidebar
+            );
+
+        });
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Escape") {
+                closeSidebar();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       MOVING COLOR ORBS
+    ====================================================== */
+
+    const sakura =
+        document.getElementById("sakuraOrb");
+
+    const yellow =
+        document.getElementById("yellowOrb");
+
+    const blue =
+        document.getElementById("blueOrb");
+
+
+    let time = 0;
+
+
+    function animateColors() {
+
+        time += 0.003;
+
+
+        /* Sakura */
+
+        const sakuraX =
+            50 +
+            Math.sin(time * 1.05) * 38;
+
+        const sakuraY =
+            30 +
+            Math.cos(time * 0.8) * 27;
+
+
+        sakura.style.left =
+            sakuraX + "%";
+
+        sakura.style.top =
+            sakuraY + "%";
+
+
+        /* Yellow */
+
+        const yellowX =
+            50 +
+            Math.cos(time * 0.72 + 2) * 43;
+
+        const yellowY =
+            55 +
+            Math.sin(time * 0.95 + 1) * 35;
+
+
+        yellow.style.left =
+            yellowX + "%";
+
+        yellow.style.top =
+            yellowY + "%";
+
+
+        /* Blue */
+
+        const blueX =
+            50 +
+            Math.sin(time * 0.62 + 4) * 42;
+
+        const blueY =
+            55 +
+            Math.cos(time * 0.88 + 3) * 36;
+
+
+        blue.style.left =
+            blueX + "%";
+
+        blue.style.top =
+            blueY + "%";
+
+
+        /* Brightness */
+
+        const sakuraBrightness =
+            0.19 +
+            Math.abs(
+                Math.sin(time * 1.3)
+            ) * 0.16;
+
+
+        const yellowBrightness =
+            0.17 +
+            Math.abs(
+                Math.cos(time * 1.1)
+            ) * 0.15;
+
+
+        const blueBrightness =
+            0.19 +
+            Math.abs(
+                Math.sin(time * 0.9)
+            ) * 0.16;
+
+
+        sakura.style.opacity =
+            sakuraBrightness;
+
+        yellow.style.opacity =
+            yellowBrightness;
+
+        blue.style.opacity =
+            blueBrightness;
+
+
+        requestAnimationFrame(
+            animateColors
+        );
+
+    }
+
+
+    animateColors();
+
+
+    /* =====================================================
+       SUBTLE COLOR MOVEMENT
+    ====================================================== */
+
+    let cursorTime = 0;
+
+
+    function cursorGlow() {
+
+        cursorTime += 0.01;
+
+
+        sakura.style.transform =
+            `translate(
+                ${Math.sin(cursorTime) * 8}px,
+                ${Math.cos(cursorTime * 0.8) * 8}px
+            )`;
+
+
+        yellow.style.transform =
+            `translate(
+                ${Math.cos(cursorTime * 0.7) * 10}px,
+                ${Math.sin(cursorTime * 0.9) * 10}px
+            )`;
+
+
+        blue.style.transform =
+            `translate(
+                ${Math.sin(cursorTime * 0.6) * 12}px,
+                ${Math.cos(cursorTime * 0.75) * 12}px
+            )`;
+
+
+        requestAnimationFrame(
+            cursorGlow
+        );
+
+    }
+
+
+    cursorGlow();
+
+</script>
+```
+
+</body>
+
+</html>
