@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Hanahx - Top Fans</title>
@@ -22,822 +25,2012 @@
         rel="stylesheet"
     >
 
-    <style>
+<style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        body {
-            background: #050507;
-            color: white;
-            font-family: "Inter", Arial, sans-serif;
-            overflow-x: hidden;
-        }
+    body {
+        background: #030306;
+        color: white;
+        font-family: "Inter", Arial, sans-serif;
+        overflow-x: hidden;
+    }
 
-        /* =========================
-           BACKGROUND
-        ========================= */
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -3;
+    /* =====================================================
+       LIQUID MULTICOLOR BACKGROUND
+    ===================================================== */
 
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(120, 50, 255, 0.25),
-                    transparent 40%
-                ),
-                radial-gradient(
-                    circle at 0% 80%,
-                    rgba(80, 30, 200, 0.12),
-                    transparent 35%
-                ),
-                #050507;
-        }
+    .visual-background {
 
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 999;
+        position: fixed;
+        inset: -15%;
 
-            background-image:
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
-        }
+        overflow: hidden;
 
-        /* =========================
-           NAVBAR
-        ========================= */
+        pointer-events: none;
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 75px;
+        z-index: -10;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        background:
+            radial-gradient(
+                ellipse at 50% 50%,
+                rgba(80, 40, 130, 0.08),
+                transparent 55%
+            ),
+            #030306;
+    }
 
-            padding: 0 7%;
 
-            background: rgba(5, 5, 7, 0.65);
-            backdrop-filter: blur(18px);
+    /*
+        Large soft liquid shapes.
+        These overlap and blend together.
+    */
 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    .color-orb {
 
-            z-index: 100;
-        }
+        position: absolute;
 
-        .logo {
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
+        pointer-events: none;
 
-        .logo span {
-            color: #8c4dff;
-        }
+        mix-blend-mode: screen;
 
-        .home-button {
-            padding: 11px 20px;
-            border-radius: 10px;
+        filter:
+            blur(70px)
+            saturate(150%);
 
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        opacity: 0.48;
 
-            color: #aaa;
-            text-decoration: none;
+        will-change:
+            transform,
+            border-radius;
 
-            font-size: 13px;
-            font-weight: 700;
+        animation:
+            liquidMorph 12s ease-in-out infinite alternate,
+            liquidPulse 7s ease-in-out infinite;
+    }
 
-            transition: 0.25s ease;
-        }
 
-        .home-button:hover {
-            color: white;
-            background: rgba(124, 60, 255, 0.15);
-            border-color: rgba(140, 77, 255, 0.4);
-            transform: translateY(-2px);
-        }
+    /* =====================================================
+       SAKURA LIQUID
+    ===================================================== */
 
-        /* =========================
-           HERO
-        ========================= */
+    .sakura-orb {
 
-        .hero {
-            padding: 150px 20px 60px;
-            text-align: center;
-        }
+        width: 560px;
+        height: 480px;
 
-        .hero-content {
-            max-width: 850px;
-            margin: auto;
-            animation: fadeUp 0.8s ease forwards;
-        }
+        left: -170px;
+        top: -140px;
 
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            padding: 7px 13px;
-            border-radius: 999px;
-
-            background: rgba(124, 60, 255, 0.1);
-            border: 1px solid rgba(124, 60, 255, 0.25);
-
-            color: #c4a4ff;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            margin-bottom: 20px;
-        }
-
-        .eyebrow i {
-            color: #8c4dff;
-        }
-
-        .hero h1 {
-            font-size: clamp(45px, 8vw, 82px);
-            line-height: 0.95;
-            font-weight: 900;
-            letter-spacing: -4px;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(
-                90deg,
-                #ffffff,
-                #9b63ff,
-                #d0b7ff
+        background:
+            radial-gradient(
+                ellipse at 40% 40%,
+                rgba(255, 120, 210, 0.95) 0%,
+                rgba(255, 65, 175, 0.65) 30%,
+                rgba(255, 20, 150, 0.25) 55%,
+                transparent 75%
             );
 
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        border-radius:
+            58% 42% 65% 35%
+            /
+            45% 60% 40% 55%;
+
+        animation:
+            sakuraLiquid 20s ease-in-out infinite alternate,
+            liquidMorph 11s ease-in-out infinite alternate,
+            liquidPulse 6s ease-in-out infinite;
+    }
+
+
+    /* =====================================================
+       YELLOW LIQUID
+    ===================================================== */
+
+    .yellow-orb {
+
+        width: 500px;
+        height: 430px;
+
+        right: -150px;
+        top: 20%;
+
+        background:
+            radial-gradient(
+                ellipse at 45% 45%,
+                rgba(255, 245, 75, 0.98) 0%,
+                rgba(255, 200, 20, 0.65) 30%,
+                rgba(255, 150, 0, 0.25) 55%,
+                transparent 75%
+            );
+
+        border-radius:
+            40% 60% 35% 65%
+            /
+            60% 45% 55% 40%;
+
+        animation:
+            yellowLiquid 23s ease-in-out infinite alternate,
+            liquidMorph 13s ease-in-out infinite alternate,
+            liquidPulse 7s ease-in-out infinite;
+    }
+
+
+    /* =====================================================
+       BLUE LIQUID
+    ===================================================== */
+
+    .blue-orb {
+
+        width: 600px;
+        height: 500px;
+
+        left: 15%;
+        bottom: -220px;
+
+        background:
+            radial-gradient(
+                ellipse at 50% 40%,
+                rgba(60, 180, 255, 1) 0%,
+                rgba(0, 110, 255, 0.7) 30%,
+                rgba(0, 65, 255, 0.28) 55%,
+                transparent 75%
+            );
+
+        border-radius:
+            60% 40% 50% 50%
+            /
+            40% 60% 45% 55%;
+
+        animation:
+            blueLiquid 21s ease-in-out infinite alternate,
+            liquidMorph 14s ease-in-out infinite alternate,
+            liquidPulse 6.5s ease-in-out infinite;
+    }
+
+
+    /* =====================================================
+       PURPLE LIQUID
+    ===================================================== */
+
+    .purple-orb {
+
+        width: 480px;
+        height: 420px;
+
+        left: 38%;
+        top: 38%;
+
+        background:
+            radial-gradient(
+                ellipse at 50% 50%,
+                rgba(190, 90, 255, 0.95) 0%,
+                rgba(125, 35, 255, 0.6) 32%,
+                rgba(90, 20, 255, 0.22) 55%,
+                transparent 75%
+            );
+
+        border-radius:
+            45% 55% 65% 35%
+            /
+            55% 40% 60% 45%;
+
+        animation:
+            purpleLiquid 25s ease-in-out infinite alternate,
+            liquidMorph 15s ease-in-out infinite alternate,
+            liquidPulse 8s ease-in-out infinite;
+    }
+
+
+    /* =====================================================
+       LIQUID MOVEMENT
+    ===================================================== */
+
+    @keyframes sakuraLiquid {
+
+        0% {
+            transform:
+                translate3d(0, 0, 0)
+                scale(0.85)
+                rotate(-5deg);
         }
 
-        .hero p {
-            color: #888;
-            font-size: 15px;
-            line-height: 1.7;
-            max-width: 600px;
-            margin: auto;
+        25% {
+            transform:
+                translate3d(20vw, 8vh, 0)
+                scale(1.08)
+                rotate(8deg);
         }
 
-        /* =========================
-           SEARCH
-        ========================= */
-
-        .search-container {
-            max-width: 700px;
-            margin: 35px auto 0;
-            position: relative;
+        50% {
+            transform:
+                translate3d(35vw, 30vh, 0)
+                scale(1.22)
+                rotate(-4deg);
         }
 
-        .search-box {
-            width: 100%;
-
-            display: flex;
-            align-items: center;
-
-            padding: 17px 20px;
-            border-radius: 14px;
-
-            background: rgba(255, 255, 255, 0.045);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-
-            backdrop-filter: blur(12px);
-
-            transition: 0.3s ease;
+        75% {
+            transform:
+                translate3d(12vw, 50vh, 0)
+                scale(0.95)
+                rotate(10deg);
         }
 
-        .search-box:focus-within {
-            border-color: rgba(140, 77, 255, 0.6);
+        100% {
+            transform:
+                translate3d(-5vw, 25vh, 0)
+                scale(1.08)
+                rotate(-8deg);
+        }
+    }
 
-            box-shadow:
-                0 0 0 4px rgba(140, 77, 255, 0.08),
-                0 15px 50px rgba(124, 60, 255, 0.1);
+
+    @keyframes yellowLiquid {
+
+        0% {
+            transform:
+                translate3d(0, 0, 0)
+                scale(0.9)
+                rotate(5deg);
         }
 
-        .search-box i {
-            color: #777;
-            font-size: 17px;
-            margin-right: 12px;
+        25% {
+            transform:
+                translate3d(-18vw, 12vh, 0)
+                scale(1.12)
+                rotate(-8deg);
         }
 
-        .search-box input {
-            width: 100%;
-            border: none;
-            outline: none;
-
-            background: transparent;
-            color: white;
-
-            font-family: inherit;
-            font-size: 14px;
+        50% {
+            transform:
+                translate3d(-35vw, 35vh, 0)
+                scale(0.95)
+                rotate(5deg);
         }
 
-        .search-box input::placeholder {
-            color: #666;
+        75% {
+            transform:
+                translate3d(-20vw, 50vh, 0)
+                scale(1.2)
+                rotate(-6deg);
         }
 
-        /* =========================
-           FANS SECTION
-        ========================= */
+        100% {
+            transform:
+                translate3d(5vw, 25vh, 0)
+                scale(0.9)
+                rotate(8deg);
+        }
+    }
 
-        .fans-section {
-            max-width: 1150px;
-            margin: auto;
-            padding: 40px 7% 130px;
+
+    @keyframes blueLiquid {
+
+        0% {
+            transform:
+                translate3d(0, 0, 0)
+                scale(0.85)
+                rotate(-5deg);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 35px;
+        25% {
+            transform:
+                translate3d(20vw, -10vh, 0)
+                scale(1.15)
+                rotate(8deg);
         }
 
-        .section-header small {
-            color: #8c4dff;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 2px;
+        50% {
+            transform:
+                translate3d(40vw, -25vh, 0)
+                scale(1.25)
+                rotate(-5deg);
         }
 
-        .section-header h2 {
-            margin-top: 9px;
-            font-size: 34px;
-            font-weight: 900;
-            letter-spacing: -1.5px;
+        75% {
+            transform:
+                translate3d(15vw, -40vh, 0)
+                scale(0.95)
+                rotate(10deg);
         }
 
-        .section-header p {
-            color: #777;
-            margin-top: 8px;
-            font-size: 13px;
+        100% {
+            transform:
+                translate3d(-15vw, -20vh, 0)
+                scale(1.08)
+                rotate(-8deg);
+        }
+    }
+
+
+    @keyframes purpleLiquid {
+
+        0% {
+            transform:
+                translate3d(0, 0, 0)
+                scale(0.85)
+                rotate(0deg);
         }
 
-        /* =========================
-           FAN GRID
-        ========================= */
-
-        .fans-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+        25% {
+            transform:
+                translate3d(-15vw, 12vh, 0)
+                scale(1.15)
+                rotate(10deg);
         }
 
-        /* =========================
-           FAN CARD
-        ========================= */
-
-        .fan-card {
-            position: relative;
-
-            padding: 30px 25px;
-            min-height: 200px;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            background: rgba(255, 255, 255, 0.035);
-
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 17px;
-
-            overflow: hidden;
-
-            transition:
-                transform 0.3s ease,
-                border-color 0.3s ease,
-                background 0.3s ease;
-
-            animation: fadeUp 0.7s ease both;
+        50% {
+            transform:
+                translate3d(10vw, 25vh, 0)
+                scale(1.25)
+                rotate(-8deg);
         }
 
-        .fan-card::before {
-            content: "";
-
-            position: absolute;
-
-            width: 170px;
-            height: 170px;
-
-            right: -70px;
-            bottom: -90px;
-
-            background: #8c4dff;
-
-            filter: blur(70px);
-            opacity: 0;
-
-            transition: 0.4s ease;
+        75% {
+            transform:
+                translate3d(25vw, -5vh, 0)
+                scale(0.95)
+                rotate(7deg);
         }
 
-        .fan-card:hover {
-            transform: translateY(-7px);
+        100% {
+            transform:
+                translate3d(-10vw, -20vh, 0)
+                scale(1.1)
+                rotate(-5deg);
+        }
+    }
 
-            border-color: rgba(140, 77, 255, 0.45);
 
-            background: rgba(140, 77, 255, 0.07);
+    /* =====================================================
+       LIQUID EDGE MORPHING
+    ===================================================== */
+
+    @keyframes liquidMorph {
+
+        0% {
+
+            border-radius:
+                45% 55% 60% 40%
+                /
+                55% 45% 55% 45%;
         }
 
-        .fan-card:hover::before {
-            opacity: 0.25;
+        20% {
+
+            border-radius:
+                65% 35% 45% 55%
+                /
+                40% 60% 50% 50%;
         }
 
-        /* =========================
-           ONE HEART
-        ========================= */
+        40% {
 
-        .fan-heart {
-            position: relative;
-            z-index: 2;
+            border-radius:
+                35% 65% 55% 45%
+                /
+                65% 35% 60% 40%;
+        }
 
-            color: #8c4dff;
-            font-size: 28px;
+        60% {
 
-            margin-bottom: 12px;
+            border-radius:
+                55% 45% 35% 65%
+                /
+                45% 55% 65% 35%;
+        }
+
+        80% {
+
+            border-radius:
+                40% 60% 70% 30%
+                /
+                60% 40% 45% 55%;
+        }
+
+        100% {
+
+            border-radius:
+                60% 40% 50% 50%
+                /
+                35% 65% 55% 45%;
+        }
+    }
+
+
+    /* =====================================================
+       LIQUID BRIGHTNESS
+    ===================================================== */
+
+    @keyframes liquidPulse {
+
+        0% {
+            opacity: 0.35;
 
             filter:
-                drop-shadow(
-                    0 0 7px
-                    rgba(140, 77, 255, 0.6)
-                );
-
-            animation: heartFloat 2s ease-in-out infinite;
-
-            transition: 0.25s ease;
+                blur(85px)
+                saturate(130%)
+                brightness(0.85);
         }
 
-        .fan-card:hover .fan-heart {
-            color: #a875ff;
-            transform: scale(1.12);
+        50% {
+            opacity: 0.62;
+
+            filter:
+                blur(62px)
+                saturate(175%)
+                brightness(1.25);
         }
 
-        /* =========================
-           FAN AVATAR
-        ========================= */
+        100% {
+            opacity: 0.4;
 
-        .fan-avatar {
-            position: relative;
-            z-index: 2;
+            filter:
+                blur(78px)
+                saturate(145%)
+                brightness(0.95);
+        }
+    }
 
-            width: 72px;
-            height: 72px;
 
-            border-radius: 50%;
+    /* =====================================================
+       LIQUID COLOR MIX
+    ===================================================== */
 
-            object-fit: cover;
+    .visual-background::after {
 
-            border: 2px solid rgba(140, 77, 255, 0.55);
+        content: "";
 
-            box-shadow:
-                0 0 25px rgba(124, 60, 255, 0.25);
+        position: absolute;
 
-            margin-bottom: 14px;
+        inset: -20%;
 
-            transition: 0.3s ease;
+        pointer-events: none;
+
+        background:
+
+            radial-gradient(
+                ellipse at 20% 20%,
+                rgba(255, 100, 200, 0.08),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                ellipse at 80% 30%,
+                rgba(255, 225, 50, 0.07),
+                transparent 35%
+            ),
+
+            radial-gradient(
+                ellipse at 30% 85%,
+                rgba(40, 150, 255, 0.09),
+                transparent 40%
+            ),
+
+            radial-gradient(
+                ellipse at 75% 75%,
+                rgba(165, 70, 255, 0.08),
+                transparent 40%
+            );
+
+        filter: blur(60px);
+
+        animation:
+            liquidBlend 18s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes liquidBlend {
+
+        0% {
+            transform:
+                scale(1)
+                rotate(0deg);
         }
 
-        .fan-card:hover .fan-avatar {
-            transform: scale(1.06);
-
-            border-color: #9b63ff;
-
-            box-shadow:
-                0 0 35px rgba(124, 60, 255, 0.4);
+        50% {
+            transform:
+                scale(1.12)
+                rotate(5deg);
         }
 
-        /* =========================
-           FAN NAME
-        ========================= */
+        100% {
+            transform:
+                scale(1.04)
+                rotate(-5deg);
+        }
+    }
 
-        .fan-name {
-            position: relative;
-            z-index: 2;
+
+    /* =====================================================
+       NOISE
+    ===================================================== */
+
+    body::after {
+
+        content: "";
+
+        position: fixed;
+
+        inset: 0;
+
+        pointer-events: none;
+
+        z-index: 999;
+
+        opacity: 0.35;
+
+        background-image:
+            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    .navbar {
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+
+        height: 75px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 0 7%;
+
+        background:
+            rgba(3, 3, 6, 0.62);
+
+        backdrop-filter: blur(20px);
+
+        -webkit-backdrop-filter: blur(20px);
+
+        border-bottom:
+            1px solid rgba(255,255,255,0.06);
+
+        z-index: 100;
+    }
+
+
+    .logo {
+
+        font-size: 22px;
+
+        font-weight: 900;
+
+        letter-spacing: -1px;
+    }
+
+
+    .logo span {
+
+        color: #ff75c8;
+
+        text-shadow:
+            0 0 18px
+            rgba(255, 100, 200, 0.7);
+    }
+
+
+    .home-button {
+
+        padding: 11px 20px;
+
+        border-radius: 10px;
+
+        background:
+            rgba(255,255,255,0.05);
+
+        border:
+            1px solid rgba(255,255,255,0.08);
+
+        color: #aaa;
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        transition: 0.25s ease;
+    }
+
+
+    .home-button:hover {
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(255,100,200,0.14),
+                rgba(60,150,255,0.12),
+                rgba(255,220,50,0.1)
+            );
+
+        border-color:
+            rgba(255,150,220,0.45);
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 10px 35px
+            rgba(255,100,200,0.12);
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+
+        padding:
+            150px 20px 60px;
+
+        text-align: center;
+    }
+
+
+    .hero-content {
+
+        max-width: 850px;
+
+        margin: auto;
+
+        animation:
+            fadeUp 0.8s ease forwards;
+    }
+
+
+    .eyebrow {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 7px 13px;
+
+        border-radius: 999px;
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(255,100,200,0.10),
+                rgba(255,220,50,0.08),
+                rgba(50,150,255,0.10)
+            );
+
+        border:
+            1px solid rgba(255,150,220,0.25);
+
+        color: #f3b8dc;
+
+        font-size: 12px;
+
+        font-weight: 800;
+
+        margin-bottom: 20px;
+
+        box-shadow:
+            0 0 30px
+            rgba(255,100,200,0.08);
+    }
+
+
+    .eyebrow i {
+
+        color: #ff72c4;
+
+        filter:
+            drop-shadow(
+                0 0 8px
+                rgba(255,80,190,0.8)
+            );
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            clamp(45px, 8vw, 82px);
+
+        line-height: 0.95;
+
+        font-weight: 900;
+
+        letter-spacing: -4px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .hero h1 span {
+
+        background:
+            linear-gradient(
+                90deg,
+                #ffb5df,
+                #fff36a,
+                #61c8ff,
+                #ff86d0
+            );
+
+        background-size:
+            300% 100%;
+
+        -webkit-background-clip: text;
+
+        background-clip: text;
+
+        color: transparent;
+
+        animation:
+            rainbowText 7s ease-in-out infinite;
+    }
+
+
+    @keyframes rainbowText {
+
+        0% {
+            background-position: 0% 50%;
         }
 
-        .fan-name h3 {
-            font-size: 16px;
-            font-weight: 800;
-            color: white;
+        50% {
+            background-position: 100% 50%;
         }
 
-        /* =========================
-           NO RESULTS
-        ========================= */
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 
-        .no-results {
-            display: none;
-            text-align: center;
-            padding: 60px 20px;
-            color: #666;
+
+    .hero p {
+
+        color: #888;
+
+        font-size: 15px;
+
+        line-height: 1.7;
+
+        max-width: 600px;
+
+        margin: auto;
+    }
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    .search-container {
+
+        max-width: 700px;
+
+        margin: 35px auto 0;
+
+        position: relative;
+    }
+
+
+    .search-box {
+
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        padding: 17px 20px;
+
+        border-radius: 14px;
+
+        background:
+            rgba(255,255,255,0.045);
+
+        border:
+            1px solid rgba(255,255,255,0.09);
+
+        backdrop-filter: blur(15px);
+
+        transition: 0.3s ease;
+
+        box-shadow:
+            0 15px 50px
+            rgba(0,0,0,0.18);
+    }
+
+
+    .search-box:focus-within {
+
+        border-color:
+            rgba(255,130,210,0.6);
+
+        box-shadow:
+            0 0 0 4px
+            rgba(255,100,200,0.07),
+
+            0 0 45px
+            rgba(70,160,255,0.08),
+
+            0 15px 50px
+            rgba(0,0,0,0.2);
+    }
+
+
+    .search-box i {
+
+        color: #777;
+
+        font-size: 17px;
+
+        margin-right: 12px;
+
+        transition: 0.3s ease;
+    }
+
+
+    .search-box:focus-within i {
+
+        color: #ff8dce;
+
+        filter:
+            drop-shadow(
+                0 0 8px
+                rgba(255,100,200,0.7)
+            );
+    }
+
+
+    .search-box input {
+
+        width: 100%;
+
+        border: none;
+
+        outline: none;
+
+        background: transparent;
+
+        color: white;
+
+        font-family: inherit;
+
+        font-size: 14px;
+    }
+
+
+    .search-box input::placeholder {
+
+        color: #666;
+    }
+
+
+    /* =====================================================
+       FANS SECTION
+    ===================================================== */
+
+    .fans-section {
+
+        max-width: 1150px;
+
+        margin: auto;
+
+        padding:
+            40px 7% 130px;
+    }
+
+
+    .section-header {
+
+        text-align: center;
+
+        margin-bottom: 35px;
+    }
+
+
+    .section-header small {
+
+        background:
+            linear-gradient(
+                90deg,
+                #ff82cb,
+                #fff05c,
+                #55bdff
+            );
+
+        background-size:
+            200% 100%;
+
+        -webkit-background-clip: text;
+
+        background-clip: text;
+
+        color: transparent;
+
+        animation:
+            rainbowText 6s ease-in-out infinite;
+
+        font-size: 11px;
+
+        font-weight: 800;
+
+        letter-spacing: 2px;
+    }
+
+
+    .section-header h2 {
+
+        margin-top: 9px;
+
+        font-size: 34px;
+
+        font-weight: 900;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .section-header p {
+
+        color: #777;
+
+        margin-top: 8px;
+
+        font-size: 13px;
+    }
+
+
+    /* =====================================================
+       FAN GRID
+    ===================================================== */
+
+    .fans-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 15px;
+    }
+
+
+    /* =====================================================
+       FAN CARD
+    ===================================================== */
+
+    .fan-card {
+
+        position: relative;
+
+        padding: 30px 25px;
+
+        min-height: 200px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        background:
+            rgba(255,255,255,0.035);
+
+        border:
+            1px solid rgba(255,255,255,0.07);
+
+        border-radius: 17px;
+
+        overflow: hidden;
+
+        transition:
+            transform 0.35s ease,
+            border-color 0.35s ease,
+            background 0.35s ease,
+            box-shadow 0.35s ease;
+
+        animation:
+            fadeUp 0.7s ease both;
+    }
+
+
+    /* Liquid glow inside card */
+
+    .fan-card::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 260px;
+        height: 260px;
+
+        right: -120px;
+        bottom: -140px;
+
+        background:
+            radial-gradient(
+                ellipse,
+                rgba(255,100,200,0.7),
+                rgba(255,220,50,0.4) 30%,
+                rgba(40,150,255,0.35) 50%,
+                transparent 72%
+            );
+
+        filter:
+            blur(45px);
+
+        opacity: 0;
+
+        transition:
+            opacity 0.45s ease;
+
+        animation:
+            cardGlow 10s ease-in-out infinite alternate;
+    }
+
+
+    .fan-card::after {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            linear-gradient(
+                125deg,
+                transparent 25%,
+                rgba(255,120,210,0.035),
+                rgba(255,225,70,0.025),
+                rgba(50,160,255,0.035),
+                transparent 75%
+            );
+
+        background-size:
+            300% 300%;
+
+        animation:
+            cardShimmer 9s ease-in-out infinite;
+
+        pointer-events: none;
+    }
+
+
+    @keyframes cardGlow {
+
+        0% {
+
+            transform:
+                translate(20px, 20px)
+                scale(0.8)
+                rotate(0deg);
+
+            border-radius: 60% 40% 50% 50%;
         }
 
-        .no-results i {
-            font-size: 35px;
-            color: #8c4dff;
-            margin-bottom: 15px;
+        50% {
+
+            transform:
+                translate(-90px, -70px)
+                scale(1.2)
+                rotate(120deg);
+
+            border-radius: 35% 65% 60% 40%;
         }
 
-        .no-results h3 {
-            color: #aaa;
-            margin-bottom: 7px;
+        100% {
+
+            transform:
+                translate(10px, -30px)
+                scale(0.95)
+                rotate(240deg);
+
+            border-radius: 55% 45% 35% 65%;
+        }
+    }
+
+
+    @keyframes cardShimmer {
+
+        0% {
+            background-position: 0% 50%;
         }
 
-        .no-results p {
-            font-size: 13px;
+        50% {
+            background-position: 100% 50%;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
 
-            padding: 35px 7%;
+    .fan-card:hover {
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        transform:
+            translateY(-8px)
+            scale(1.015);
 
-            color: #666;
+        border-color:
+            rgba(255,140,215,0.42);
 
-            font-size: 12px;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(255,100,200,0.075),
+                rgba(255,220,60,0.045),
+                rgba(40,150,255,0.065)
+            );
 
-            text-align: center;
+        box-shadow:
+
+            0 18px 55px
+            rgba(255,90,200,0.08),
+
+            0 0 35px
+            rgba(40,140,255,0.05);
+    }
+
+
+    .fan-card:hover::before {
+
+        opacity: 0.32;
+    }
+
+
+    /* =====================================================
+       HEART
+    ===================================================== */
+
+    .fan-heart {
+
+        position: relative;
+
+        z-index: 2;
+
+        color: #ff78c8;
+
+        font-size: 28px;
+
+        margin-bottom: 12px;
+
+        filter:
+            drop-shadow(
+                0 0 7px
+                rgba(255,80,190,0.7)
+            );
+
+        animation:
+            heartFloat 2s ease-in-out infinite,
+            heartColor 6s ease-in-out infinite;
+
+        transition:
+            0.25s ease;
+    }
+
+
+    @keyframes heartColor {
+
+        0% {
+            color: #ff79c9;
         }
 
-        /* =========================
-           ANIMATIONS
-        ========================= */
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        33% {
+            color: #fff05b;
         }
 
-        @keyframes heartFloat {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-3px);
-            }
+        66% {
+            color: #52bfff;
         }
 
-        .fan-card:nth-child(1) {
-            animation-delay: .05s;
+        100% {
+            color: #ff79c9;
+        }
+    }
+
+
+    .fan-card:hover .fan-heart {
+
+        transform:
+            scale(1.18);
+
+        filter:
+            drop-shadow(
+                0 0 14px
+                rgba(255,130,210,0.9)
+            );
+    }
+
+
+    /* =====================================================
+       AVATAR
+    ===================================================== */
+
+    .fan-avatar {
+
+        position: relative;
+
+        z-index: 2;
+
+        width: 72px;
+        height: 72px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+
+        border:
+            2px solid
+            rgba(255,130,210,0.55);
+
+        box-shadow:
+
+            0 0 25px
+            rgba(255,100,200,0.18),
+
+            0 0 45px
+            rgba(40,150,255,0.08);
+
+        margin-bottom: 14px;
+
+        transition:
+            0.35s ease;
+    }
+
+
+    .fan-card:hover .fan-avatar {
+
+        transform:
+            scale(1.08);
+
+        border-color:
+            #ff9bd7;
+
+        box-shadow:
+
+            0 0 30px
+            rgba(255,100,200,0.32),
+
+            0 0 50px
+            rgba(50,160,255,0.16);
+    }
+
+
+    /* =====================================================
+       FAN NAME
+    ===================================================== */
+
+    .fan-name {
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .fan-name h3 {
+
+        font-size: 16px;
+
+        font-weight: 800;
+
+        color: white;
+
+        transition:
+            0.3s ease;
+    }
+
+
+    .fan-card:hover .fan-name h3 {
+
+        text-shadow:
+            0 0 18px
+            rgba(255,150,220,0.4);
+    }
+
+
+    /* =====================================================
+       NO RESULTS
+    ===================================================== */
+
+    .no-results {
+
+        display: none;
+
+        text-align: center;
+
+        padding: 60px 20px;
+
+        color: #666;
+    }
+
+
+    .no-results i {
+
+        font-size: 35px;
+
+        color: #ff7bca;
+
+        margin-bottom: 15px;
+
+        filter:
+            drop-shadow(
+                0 0 10px
+                rgba(255,100,200,0.7)
+            );
+    }
+
+
+    .no-results h3 {
+
+        color: #aaa;
+
+        margin-bottom: 7px;
+    }
+
+
+    .no-results p {
+
+        font-size: 13px;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+
+        border-top:
+            1px solid rgba(255,255,255,0.06);
+
+        padding:
+            35px 7%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: #666;
+
+        font-size: 12px;
+
+        text-align: center;
+
+        background:
+            rgba(3,3,6,0.25);
+    }
+
+
+    /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+
+    @keyframes fadeUp {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateY(25px);
         }
 
-        .fan-card:nth-child(2) {
-            animation-delay: .10s;
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+    }
+
+
+    @keyframes heartFloat {
+
+        0%,
+        100% {
+
+            transform:
+                translateY(0);
         }
 
-        .fan-card:nth-child(3) {
-            animation-delay: .15s;
+        50% {
+
+            transform:
+                translateY(-3px);
+        }
+    }
+
+
+    .fan-card:nth-child(1) {
+        animation-delay: .05s;
+    }
+
+    .fan-card:nth-child(2) {
+        animation-delay: .10s;
+    }
+
+    .fan-card:nth-child(3) {
+        animation-delay: .15s;
+    }
+
+    .fan-card:nth-child(4) {
+        animation-delay: .20s;
+    }
+
+    .fan-card:nth-child(5) {
+        animation-delay: .25s;
+    }
+
+    .fan-card:nth-child(6) {
+        animation-delay: .30s;
+    }
+
+
+    /* =====================================================
+       TABLET / IPAD
+    ===================================================== */
+
+    @media (max-width: 850px) {
+
+        .fans-grid {
+
+            grid-template-columns:
+                repeat(2, 1fr);
         }
 
-        .fan-card:nth-child(4) {
-            animation-delay: .20s;
+        .color-orb {
+
+            filter:
+                blur(60px)
+                saturate(145%);
+        }
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 520px) {
+
+        .navbar {
+
+            padding:
+                0 20px;
         }
 
-        .fan-card:nth-child(5) {
-            animation-delay: .25s;
+
+        .hero {
+
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
-        .fan-card:nth-child(6) {
-            animation-delay: .30s;
+
+        .hero h1 {
+
+            letter-spacing:
+                -3px;
         }
 
-        /* =========================
-           MOBILE
-        ========================= */
 
-        @media (max-width: 850px) {
-            .fans-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .fans-section {
+
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
-        @media (max-width: 520px) {
 
-            .navbar {
-                padding: 0 20px;
-            }
+        .fans-grid {
 
-            .hero {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .hero h1 {
-                letter-spacing: -3px;
-            }
-
-            .fans-section {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .fans-grid {
-                grid-template-columns: 1fr;
-            }
+            grid-template-columns:
+                1fr;
         }
 
-    </style>
+
+        .color-orb {
+
+            filter:
+                blur(50px)
+                saturate(140%);
+
+            opacity:
+                0.4;
+        }
+    }
+
+
+    /* =====================================================
+       REDUCED MOTION
+    ===================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+
+            animation-duration:
+                0.01ms !important;
+
+            animation-iteration-count:
+                1 !important;
+
+            scroll-behavior:
+                auto !important;
+        }
+    }
+
+</style>
 
 </head>
 
+
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
 
-    <nav class="navbar">
+<!-- =====================================================
+     LIQUID MULTICOLOR VISUAL LAYER
+====================================================== -->
 
-        <div class="logo">
-            hanah<span>.</span>
+<div class="visual-background">
+
+    <div class="color-orb sakura-orb"></div>
+
+    <div class="color-orb yellow-orb"></div>
+
+    <div class="color-orb blue-orb"></div>
+
+    <div class="color-orb purple-orb"></div>
+
+</div>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        hanah<span>.</span>
+
+    </div>
+
+
+    <a
+        class="home-button"
+        href="index.html"
+    >
+
+        <i class="fa-solid fa-house"></i>
+
+        Home
+
+    </a>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO / SEARCH
+====================================================== -->
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+
+            <div class="eyebrow">
+
+                <i class="fa-solid fa-heart"></i>
+
+                COMMUNITY
+
+            </div>
+
+
+            <h1>
+
+                <span>Top Fans</span>
+
+            </h1>
+
+
+            <p>
+
+                Discover members of the Hanahx community.
+
+                Search for a username below to find a fan.
+
+            </p>
+
+
+            <div class="search-container">
+
+                <div class="search-box">
+
+                    <i
+                        class="fa-solid fa-magnifying-glass"
+                    ></i>
+
+
+                    <input
+                        type="text"
+                        id="fanSearch"
+                        placeholder="Search for a username..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
         </div>
 
-        <a
-            class="home-button"
-            href="index.html"
+    </section>
+
+
+    <!-- =================================================
+         FAN LIST
+    ================================================== -->
+
+    <section class="fans-section">
+
+
+        <div class="section-header">
+
+            <small>
+
+                HANAHX COMMUNITY
+
+            </small>
+
+
+            <h2>
+
+                Featured Fans
+
+            </h2>
+
+
+            <p>
+
+                Some of the community members.
+
+            </p>
+
+        </div>
+
+
+        <div
+            class="fans-grid"
+            id="fansGrid"
         >
-            <i class="fa-solid fa-house"></i>
-            Home
-        </a>
 
-    </nav>
 
-    <!-- =========================
-         HERO / SEARCH
-    ========================== -->
-
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <div class="eyebrow">
-                    <i class="fa-solid fa-heart"></i>
-                    COMMUNITY
-                </div>
-
-                <h1>
-                    <span>Top Fans</span>
-                </h1>
-
-                <p>
-                    Discover members of the Hanahx community.
-                    Search for a username below to find a fan.
-                </p>
-
-                <div class="search-container">
-
-                    <div class="search-box">
-
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
-                        <input
-                            type="text"
-                            id="fanSearch"
-                            placeholder="Search for a username..."
-                            autocomplete="off"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- =========================
-             FAN LIST
-        ========================== -->
-
-        <section class="fans-section">
-
-            <div class="section-header">
-
-                <small>HANAHX COMMUNITY</small>
-
-                <h2>Featured Fans</h2>
-
-                <p>
-                    Some of the community members.
-                </p>
-
-            </div>
+            <!-- ANGELRIVERA -->
 
             <div
-                class="fans-grid"
-                id="fansGrid"
+                class="fan-card"
+                data-username="Angelrivera"
             >
 
-                <!-- MASE -->
+                <i
+                    class="fa-solid fa-heart fan-heart"
+                ></i>
 
-                <div class="fan-card" data-username="Angelrivera">
-  <i class="fa-solid fa-heart fan-heart"></i>
-  <img class="fan-avatar" src="whywasifuckingforcedtodothis.jpg" alt="Angelrivera">
-  <div class="fan-name">
-    <h3>@angelrivera3785</h3>
-  </div>
-</div>
 
-                <!-- EVELYN -->
-
-                <div class="fan-card" data-username="Evelyn">
-  <i class="fa-solid fa-heart fan-heart"></i>
-  <img class="fan-avatar" src="Evelyn.jpg" alt="Evelyn">
-  <div class="fan-name">
-    <h3>@EthanEvelyn0912</h3>
-  </div>
-</div>
-
-                <!-- ARMANI -->
-
-                <div class="fan-card" data-username="fredcysantanafredcybillions">
-  <i class="fa-solid fa-heart fan-heart"></i>
-  <img class="fan-avatar" src="ARMANIMEBESTIE.jpg" alt="Armani">
-  <div class="fan-name">
-    <h3>@fredcysantanafredcybillions</h3>
-  </div>
-</div>
-
-                <!-- RZ_GRINDER -->
-
-                
-
-                <!-- SAVAGE -->
-
-                <div
-                    class="fan-card"
-                    data-username="Savage"
+                <img
+                    class="fan-avatar"
+                    src="whywasifuckingforcedtodothis.jpg"
+                    alt="Angelrivera"
                 >
 
-                    <i class="fa-solid fa-heart fan-heart"></i>
 
-                    <img
-                        class="fan-avatar"
-                        src="Savage.webp"
-                        alt="Savage"
-                    >
+                <div class="fan-name">
 
-                    <div class="fan-name">
-                        <h3>@SavageJosue123</h3>
-                    </div>
+                    <h3>
 
-                </div>
+                        @angelrivera3785
 
-                
-
-                <div
-                    class="fan-card"
-                    data-username="Mase"
-                >
-
-                    <i class="fa-solid fa-heart fan-heart"></i>
-
-                    <img
-                        class="fan-avatar"
-                        src="BESTIEEEILY.jpg"
-                        alt="MYPRECIOUSBESTIEOMGGGGASDHASODHA"
-                    >
-
-                    <div class="fan-name">
-                        <h3>@@maseplaysbrawlstars</h3>
-                    </div>
+                    </h3>
 
                 </div>
 
             </div>
 
-            <!-- NO RESULTS -->
+
+            <!-- EVELYN -->
 
             <div
-                class="no-results"
-                id="noResults"
+                class="fan-card"
+                data-username="Evelyn"
             >
 
-                <i class="fa-solid fa-user-slash"></i>
+                <i
+                    class="fa-solid fa-heart fan-heart"
+                ></i>
 
-                <h3>
-                    No fans found
-                </h3>
 
-                <p>
-                    Try searching for another username.
-                </p>
+                <img
+                    class="fan-avatar"
+                    src="Evelyn.jpg"
+                    alt="Evelyn"
+                >
+
+
+                <div class="fan-name">
+
+                    <h3>
+
+                        @EthanEvelyn0912
+
+                    </h3>
+
+                </div>
 
             </div>
 
-        </section>
 
-    </main>
+            <!-- ARMANI -->
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+            <div
+                class="fan-card"
+                data-username="fredcysantanafredcybillions"
+            >
 
-    <footer>
-        © 2026 Hanahx. All rights reserved.
-    </footer>
+                <i
+                    class="fa-solid fa-heart fan-heart"
+                ></i>
 
-    <!-- =========================
-         SEARCH SCRIPT
-    ========================== -->
 
-    <script>
+                <img
+                    class="fan-avatar"
+                    src="ARMANIMEBESTIE.jpg"
+                    alt="Armani"
+                >
 
-        const searchInput =
-            document.getElementById("fanSearch");
 
-        const fanCards =
-            document.querySelectorAll(".fan-card");
+                <div class="fan-name">
 
-        const noResults =
-            document.getElementById("noResults");
+                    <h3>
 
-        searchInput.addEventListener(
-            "input",
-            function () {
+                        @fredcysantanafredcybillions
 
-                const searchValue =
-                    this.value
-                        .toLowerCase()
-                        .trim();
+                    </h3>
 
-                let visibleCards = 0;
+                </div>
 
-                fanCards.forEach(card => {
+            </div>
 
-                    const username =
-                        card.dataset.username
-                            .toLowerCase();
 
-                    if (username.includes(searchValue)) {
+            <!-- SAVAGE -->
 
-                        card.style.display = "flex";
-                        visibleCards++;
+            <div
+                class="fan-card"
+                data-username="Savage"
+            >
 
-                    } else {
+                <i
+                    class="fa-solid fa-heart fan-heart"
+                ></i>
 
-                        card.style.display = "none";
 
-                    }
+                <img
+                    class="fan-avatar"
+                    src="Savage.webp"
+                    alt="Savage"
+                >
 
-                });
 
-                if (visibleCards === 0) {
+                <div class="fan-name">
 
-                    noResults.style.display = "block";
+                    <h3>
+
+                        @SavageJosue123
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- MASE -->
+
+            <div
+                class="fan-card"
+                data-username="Mase"
+            >
+
+                <i
+                    class="fa-solid fa-heart fan-heart"
+                ></i>
+
+
+                <img
+                    class="fan-avatar"
+                    src="BESTIEEEILY.jpg"
+                    alt="MYPRECIOUSBESTIEOMGGGGASDHASODHA"
+                >
+
+
+                <div class="fan-name">
+
+                    <h3>
+
+                        @@maseplaysbrawlstars
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             NO RESULTS
+        ================================================== -->
+
+        <div
+            class="no-results"
+            id="noResults"
+        >
+
+            <i
+                class="fa-solid fa-user-slash"
+            ></i>
+
+
+            <h3>
+
+                No fans found
+
+            </h3>
+
+
+            <p>
+
+                Try searching for another username.
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    © 2026 Hanahx. All rights reserved.
+
+</footer>
+
+
+<!-- =====================================================
+     SEARCH SCRIPT
+====================================================== -->
+
+<script>
+
+    /* =====================================================
+       FAN SEARCH
+    ===================================================== */
+
+    const searchInput =
+        document.getElementById("fanSearch");
+
+    const fanCards =
+        document.querySelectorAll(".fan-card");
+
+    const noResults =
+        document.getElementById("noResults");
+
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            const searchValue =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            let visibleCards = 0;
+
+
+            fanCards.forEach(card => {
+
+                const username =
+                    card.dataset.username
+                        .toLowerCase();
+
+
+                if (
+                    username.includes(searchValue)
+                ) {
+
+                    card.style.display =
+                        "flex";
+
+                    visibleCards++;
 
                 } else {
 
-                    noResults.style.display = "none";
-
+                    card.style.display =
+                        "none";
                 }
 
-            }
-        );
+            });
 
-    </script>
+
+            if (
+                visibleCards === 0
+            ) {
+
+                noResults.style.display =
+                    "block";
+
+            } else {
+
+                noResults.style.display =
+                    "none";
+            }
+
+        }
+    );
+
+</script>
+
 
 </body>
 
