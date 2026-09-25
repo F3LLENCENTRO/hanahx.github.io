@@ -6,17 +6,23 @@
 
     <title>Hanahx - Official Website</title>
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -28,133 +34,575 @@
         }
 
         body {
-            background: #050507;
+            background: #030408;
             color: white;
             font-family: "Inter", Arial, sans-serif;
             overflow-x: hidden;
         }
 
-        /* =========================
-           BACKGROUND
-        ========================= */
+
+        /* =========================================================
+           ANIMATED COLOR BACKGROUND
+        ========================================================= */
 
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            z-index: -3;
+            z-index: -10;
 
             background:
                 radial-gradient(
                     circle at 50% 0%,
-                    rgba(120, 50, 255, 0.25),
-                    transparent 40%
+                    rgba(255, 105, 180, 0.13),
+                    transparent 35%
                 ),
                 radial-gradient(
                     circle at 0% 80%,
-                    rgba(80, 30, 200, 0.12),
+                    rgba(0, 140, 255, 0.10),
                     transparent 35%
                 ),
-                #050507;
+                radial-gradient(
+                    circle at 100% 60%,
+                    rgba(255, 220, 40, 0.07),
+                    transparent 30%
+                ),
+                #030408;
         }
+
+
+        /* Moving ambient lights */
+
+        .color-orb {
+            position: fixed;
+            width: 420px;
+            height: 420px;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(90px);
+
+            opacity: 0.24;
+
+            z-index: -5;
+
+            mix-blend-mode: screen;
+
+            will-change: transform;
+        }
+
+
+        .sakura-orb {
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 105, 180, 0.95),
+                    rgba(255, 70, 160, 0.35),
+                    transparent 70%
+                );
+        }
+
+
+        .yellow-orb {
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 230, 55, 0.95),
+                    rgba(255, 190, 0, 0.35),
+                    transparent 70%
+                );
+        }
+
+
+        .blue-orb {
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(30, 150, 255, 0.95),
+                    rgba(0, 90, 255, 0.35),
+                    transparent 70%
+                );
+        }
+
+
+        /* Fine grain */
 
         body::after {
             content: "";
+
             position: fixed;
             inset: 0;
+
             pointer-events: none;
+
             z-index: 999;
+
+            opacity: 0.045;
 
             background-image:
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
         }
 
-        /* =========================
+
+        /* =========================================================
            NAVBAR
-        ========================= */
+        ========================================================= */
 
         .navbar {
             position: fixed;
+
             top: 0;
             left: 0;
-            width: 100%;
 
+            width: 100%;
             height: 75px;
 
             display: flex;
             align-items: center;
-            justify-content: space-between;
+
             gap: 15px;
 
-            padding: 0 7%;
+            padding: 0 5%;
 
-            background: rgba(5, 5, 7, 0.65);
-            backdrop-filter: blur(18px);
+            background: rgba(3, 4, 8, 0.66);
 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.07);
 
             z-index: 100;
         }
 
+
         .logo {
             font-size: 22px;
+
             font-weight: 900;
+
             letter-spacing: -1px;
         }
 
+
         .logo span {
-            color: #8c4dff;
+            color: #ff69b4;
+
+            text-shadow:
+                0 0 15px rgba(255,105,180,0.8);
         }
+
 
         .nav-links {
             display: flex;
+
             gap: 30px;
+
             list-style: none;
+
+            margin-left: auto;
         }
+
 
         .nav-links a {
             color: #aaa;
+
             text-decoration: none;
+
             font-size: 14px;
+
             font-weight: 600;
 
             transition: 0.25s ease;
         }
 
+
         .nav-links a:hover {
             color: white;
+
+            text-shadow:
+                0 0 15px rgba(255,255,255,0.35);
         }
+
 
         .nav-button {
             padding: 11px 18px;
 
             border-radius: 10px;
 
-            background: #7c3cff;
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff5ca8,
+                    #8f65ff,
+                    #249cff
+                );
+
+            background-size: 200% 200%;
+
             color: white;
 
             text-decoration: none;
+
             font-size: 13px;
+
             font-weight: 700;
+
+            transition: 0.3s ease;
+
+            animation: buttonGradient 6s ease infinite;
+        }
+
+
+        .nav-button:hover {
+            transform: translateY(-2px) scale(1.02);
+
+            box-shadow:
+                0 10px 35px rgba(255,105,180,0.22),
+                0 0 25px rgba(40,150,255,0.15);
+        }
+
+
+        @keyframes buttonGradient {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+
+        /* =========================================================
+           MENU BUTTON
+        ========================================================= */
+
+        .menu-button {
+            display: flex !important;
+
+            align-items: center;
+            justify-content: center;
+
+            flex: 0 0 42px;
+
+            width: 42px;
+            height: 42px;
+
+            padding: 0;
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            border-radius: 11px;
+
+            background: rgba(255,255,255,0.045);
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            transition: 0.25s ease;
+
+            z-index: 101;
+        }
+
+
+        .menu-button:hover {
+            background: rgba(255,105,180,0.12);
+
+            border-color: rgba(255,105,180,0.45);
+
+            color: #ff9acb;
+
+            transform: translateY(-1px);
+        }
+
+
+        .menu-button:active {
+            transform: scale(0.94);
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.72);
+
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+
+            z-index: 1000;
+        }
+
+
+        .sidebar-overlay.active {
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+        }
+
+
+        .sidebar {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: min(320px, 85vw);
+
+            height: 100vh;
+            height: 100dvh;
+
+            padding: 24px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 0% 0%,
+                    rgba(255,105,180,0.15),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 100% 100%,
+                    rgba(0,140,255,0.08),
+                    transparent 35%
+                ),
+                #07080d;
+
+            border-right: 1px solid rgba(255,105,180,0.20);
+
+            box-shadow:
+                20px 0 70px rgba(0,0,0,0.65);
+
+            transform: translateX(-105%);
+
+            transition:
+                transform 0.35s cubic-bezier(.77,0,.18,1);
+
+            z-index: 1001;
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow-y: auto;
+        }
+
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+
+        .sidebar-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding-bottom: 22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.07);
+        }
+
+
+        .sidebar-logo {
+            font-size: 22px;
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+        }
+
+
+        .sidebar-logo span {
+            color: #ff69b4;
+        }
+
+
+        .sidebar-close {
+            width: 40px;
+            height: 40px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            color: white;
+
+            font-size: 17px;
+
+            cursor: pointer;
 
             transition: 0.25s ease;
         }
 
-        .nav-button:hover {
-            transform: translateY(-2px);
-            background: #925cff;
-            box-shadow: 0 10px 30px rgba(124, 60, 255, 0.3);
+
+        .sidebar-close:hover {
+            background:
+                rgba(255,70,120,0.12);
+
+            border-color:
+                rgba(255,105,180,0.35);
+
+            color: #ff8fc5;
         }
 
-        /* =========================
+
+        .sidebar-links {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            margin-top: 25px;
+        }
+
+
+        .sidebar-links a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 14px 15px;
+
+            border-radius: 11px;
+
+            color: #aaa;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.25s ease;
+        }
+
+
+        .sidebar-links a i {
+            width: 20px;
+
+            text-align: center;
+
+            transition: 0.25s ease;
+        }
+
+
+        .sidebar-links a:hover {
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,105,180,0.12),
+                    rgba(30,150,255,0.07)
+                );
+
+            transform: translateX(4px);
+        }
+
+
+        .sidebar-links a:hover i {
+            color: #ff79b9;
+
+            transform: scale(1.1);
+        }
+
+
+        .sidebar-subscribe {
+            margin-top: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            padding: 13px;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff5ca8,
+                    #8d65ff,
+                    #249cff
+                );
+
+            background-size: 200% 200%;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+
+            animation: buttonGradient 6s ease infinite;
+        }
+
+
+        .sidebar-subscribe:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(255,105,180,0.2);
+        }
+
+
+        /* =========================================================
            HERO
-        ========================= */
+        ========================================================= */
 
         .hero {
             min-height: 100vh;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             text-align: center;
@@ -162,13 +610,49 @@
             padding: 120px 20px 80px;
 
             position: relative;
+
+            overflow: hidden;
         }
+
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 700px;
+            height: 400px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            background:
+                radial-gradient(
+                    ellipse,
+                    rgba(255,105,180,0.07),
+                    rgba(30,150,255,0.04),
+                    transparent 70%
+                );
+
+            filter: blur(30px);
+
+            pointer-events: none;
+        }
+
 
         .hero-content {
             max-width: 850px;
 
-            animation: fadeUp 1s ease forwards;
+            animation:
+                fadeUp 1s ease forwards;
+
+            position: relative;
+
+            z-index: 2;
         }
+
 
         .profile {
             width: 125px;
@@ -178,85 +662,158 @@
 
             object-fit: cover;
 
-            border: 3px solid rgba(140, 77, 255, 0.8);
+            border:
+                3px solid rgba(255,105,180,0.75);
 
             box-shadow:
-                0 0 0 8px rgba(140, 77, 255, 0.06),
-                0 0 70px rgba(124, 60, 255, 0.35);
+                0 0 0 8px rgba(255,105,180,0.05),
+                0 0 55px rgba(255,105,180,0.30),
+                0 0 90px rgba(30,150,255,0.12);
 
             margin-bottom: 25px;
+
+            transition:
+                border-color 1s ease,
+                box-shadow 1s ease;
         }
+
+
+        .profile:hover {
+            border-color: #ff9aca;
+
+            box-shadow:
+                0 0 0 8px rgba(255,105,180,0.07),
+                0 0 75px rgba(255,105,180,0.42),
+                0 0 100px rgba(30,150,255,0.20);
+        }
+
 
         .verified {
             display: inline-flex;
+
             align-items: center;
+
             gap: 7px;
 
             padding: 7px 12px;
 
             border-radius: 999px;
 
-            background: rgba(124, 60, 255, 0.1);
-            border: 1px solid rgba(124, 60, 255, 0.25);
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,105,180,0.09),
+                    rgba(255,220,50,0.06),
+                    rgba(30,150,255,0.08)
+                );
 
-            color: #c4a4ff;
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            color: #e5e5e5;
 
             font-size: 12px;
+
             font-weight: 700;
 
             margin-bottom: 18px;
         }
 
+
         .verified i {
-            color: #8c4dff;
+            color: #ff79b9;
+
+            text-shadow:
+                0 0 15px rgba(255,105,180,0.7);
         }
 
+
         .hero h1 {
-            font-size: clamp(48px, 8vw, 92px);
+            font-size:
+                clamp(48px, 8vw, 92px);
+
             line-height: 0.95;
 
             font-weight: 900;
+
             letter-spacing: -5px;
 
             margin-bottom: 25px;
         }
 
+
         .hero h1 span {
-            background: linear-gradient(
-                90deg,
-                #ffffff,
-                #9b63ff,
-                #d0b7ff
-            );
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff70b5,
+                    #ffd92f,
+                    #39aaff,
+                    #ff70b5
+                );
+
+            background-size: 300% 100%;
 
             -webkit-background-clip: text;
+
             background-clip: text;
+
             color: transparent;
+
+            animation:
+                rainbowFlow 7s ease-in-out infinite;
         }
+
+
+        @keyframes rainbowFlow {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
 
         .hero p {
             color: #999;
+
             max-width: 600px;
+
             margin: auto;
 
             font-size: 16px;
+
             line-height: 1.7;
         }
+
 
         .hero-buttons {
             margin-top: 35px;
 
             display: flex;
+
             justify-content: center;
+
             gap: 12px;
 
             flex-wrap: wrap;
         }
 
+
         .primary-button,
         .secondary-button {
             display: inline-flex;
+
             align-items: center;
+
             gap: 9px;
 
             padding: 14px 21px;
@@ -266,68 +823,105 @@
             text-decoration: none;
 
             font-size: 14px;
+
             font-weight: 700;
 
             transition: 0.3s ease;
         }
 
+
         .primary-button {
             background: white;
+
             color: black;
         }
 
+
         .primary-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255,255,255,0.12);
+
+            box-shadow:
+                0 15px 35px rgba(255,255,255,0.12);
         }
+
 
         .secondary-button {
-            background: rgba(255,255,255,0.05);
+            background:
+                rgba(255,255,255,0.05);
+
             color: white;
 
-            border: 1px solid rgba(255,255,255,0.09);
+            border:
+                1px solid rgba(255,255,255,0.09);
         }
 
+
         .secondary-button:hover {
-            background: rgba(255,255,255,0.09);
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,105,180,0.10),
+                    rgba(30,150,255,0.08)
+                );
+
+            border-color:
+                rgba(255,255,255,0.16);
+
             transform: translateY(-3px);
         }
 
-        /* =========================
+
+        /* =========================================================
            SOCIAL SECTION
-        ========================= */
+        ========================================================= */
 
         .social-section {
             padding: 100px 7% 130px;
 
             max-width: 1200px;
+
             margin: auto;
         }
 
+
         .section-header {
             text-align: center;
+
             margin-bottom: 45px;
         }
 
+
         .section-header small {
-            color: #8c4dff;
+            color: #ff76b8;
+
             font-size: 12px;
+
             font-weight: 800;
+
             letter-spacing: 2px;
+
+            text-shadow:
+                0 0 15px rgba(255,105,180,0.35);
         }
+
 
         .section-header h2 {
             margin-top: 10px;
 
             font-size: 38px;
+
             font-weight: 900;
+
             letter-spacing: -1.5px;
         }
 
+
         .section-header p {
             color: #777;
+
             margin-top: 10px;
         }
+
 
         .social-grid {
             display: grid;
@@ -338,7 +932,11 @@
             gap: 15px;
         }
 
+
         .social-card {
+            --card-color:
+                rgba(255,105,180,0.7);
+
             position: relative;
 
             padding: 25px;
@@ -346,15 +944,20 @@
             min-height: 145px;
 
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
 
             text-decoration: none;
+
             color: white;
 
-            background: rgba(255,255,255,0.035);
+            background:
+                rgba(255,255,255,0.035);
 
-            border: 1px solid rgba(255,255,255,0.07);
+            border:
+                1px solid rgba(255,255,255,0.07);
 
             border-radius: 16px;
 
@@ -366,84 +969,182 @@
                 background 0.3s ease;
         }
 
+
+        /* Individual card colors */
+
+        .social-card:nth-child(1) {
+            --card-color:
+                rgba(88,101,242,0.8);
+        }
+
+
+        .social-card:nth-child(2) {
+            --card-color:
+                rgba(255,60,80,0.8);
+        }
+
+
+        .social-card:nth-child(3) {
+            --card-color:
+                rgba(255,220,50,0.8);
+        }
+
+
+        .social-card:nth-child(4) {
+            --card-color:
+                rgba(255,105,180,0.85);
+        }
+
+
+        .social-card:nth-child(5) {
+            --card-color:
+                rgba(40,130,255,0.85);
+        }
+
+
+        .social-card:nth-child(6) {
+            --card-color:
+                rgba(255,220,45,0.85);
+        }
+
+
+        .social-card:nth-child(7) {
+            --card-color:
+                rgba(30,150,255,0.85);
+        }
+
+
         .social-card::before {
             content: "";
 
             position: absolute;
-            width: 150px;
-            height: 150px;
 
-            right: -60px;
-            bottom: -80px;
+            width: 180px;
+            height: 180px;
 
-            background: #8c4dff;
+            right: -70px;
+            bottom: -90px;
 
-            filter: blur(70px);
+            background:
+                radial-gradient(
+                    circle,
+                    var(--card-color),
+                    transparent 70%
+                );
+
+            filter: blur(45px);
 
             opacity: 0;
 
-            transition: 0.4s ease;
+            transition:
+                opacity 0.45s ease,
+                transform 0.45s ease;
         }
+
 
         .social-card:hover {
             transform: translateY(-7px);
 
-            border-color: rgba(140,77,255,0.45);
+            border-color:
+                var(--card-color);
 
-            background: rgba(140,77,255,0.07);
+            background:
+                rgba(255,255,255,0.055);
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.20);
         }
+
 
         .social-card:hover::before {
-            opacity: 0.25;
+            opacity: 0.42;
+
+            transform:
+                scale(1.25)
+                translate(-10px,-10px);
         }
+
 
         .social-icon {
             position: relative;
+
             z-index: 2;
 
             width: 45px;
             height: 45px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             border-radius: 12px;
 
-            background: rgba(255,255,255,0.06);
+            background:
+                rgba(255,255,255,0.06);
 
             font-size: 20px;
+
+            transition:
+                0.3s ease;
         }
+
+
+        .social-card:hover .social-icon {
+            background:
+                var(--card-color);
+
+            box-shadow:
+                0 0 25px var(--card-color);
+
+            transform: scale(1.06);
+        }
+
 
         .social-info {
             position: relative;
+
             z-index: 2;
         }
 
+
         .social-info h3 {
             font-size: 15px;
+
             margin-bottom: 4px;
         }
 
+
         .social-info p {
             color: #777;
+
             font-size: 12px;
         }
 
-        /* =========================
-           FEATURED YOUTUBE
-        ========================= */
+
+        /* =========================================================
+           YOUTUBE
+        ========================================================= */
 
         .youtube-section {
             max-width: 1100px;
+
             margin: 0 auto;
 
             padding: 20px 7% 130px;
         }
 
+
         .youtube-box {
+            position: relative;
+
+            overflow: hidden;
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             gap: 30px;
@@ -455,62 +1156,144 @@
             background:
                 linear-gradient(
                     135deg,
-                    rgba(124,60,255,0.15),
-                    rgba(255,255,255,0.035)
+                    rgba(255,105,180,0.10),
+                    rgba(255,220,40,0.05),
+                    rgba(30,150,255,0.10),
+                    rgba(255,255,255,0.025)
                 );
 
-            border: 1px solid rgba(255,255,255,0.08);
+            background-size: 300% 300%;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            animation:
+                boxGradient 10s ease infinite;
         }
+
+
+        @keyframes boxGradient {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+
+        .youtube-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -100px;
+            top: -150px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,105,180,0.16),
+                    transparent 70%
+                );
+
+            filter: blur(30px);
+
+            pointer-events: none;
+        }
+
+
+        .youtube-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
 
         .youtube-content h2 {
             font-size: 28px;
+
             margin-bottom: 10px;
         }
 
+
         .youtube-content p {
             color: #888;
+
             line-height: 1.6;
+
             max-width: 600px;
         }
 
+
         .youtube-button {
+            position: relative;
+
+            z-index: 2;
+
             white-space: nowrap;
 
             display: inline-flex;
+
             align-items: center;
+
             gap: 9px;
 
             padding: 14px 20px;
 
             border-radius: 10px;
 
-            background: #ff0033;
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff174f,
+                    #ff006a
+                );
 
             color: white;
+
             text-decoration: none;
 
             font-weight: 700;
+
             font-size: 13px;
 
             transition: 0.3s ease;
         }
 
+
         .youtube-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(255,0,51,0.2);
+
+            box-shadow:
+                0 15px 35px rgba(255,0,80,0.25);
         }
 
-        /* =========================
+
+        /* =========================================================
            FOOTER
-        ========================= */
+        ========================================================= */
 
         footer {
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top:
+                1px solid rgba(255,255,255,0.06);
 
             padding: 35px 7%;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             color: #666;
@@ -518,258 +1301,121 @@
             font-size: 12px;
         }
 
+
         .footer-socials {
             display: flex;
+
             gap: 15px;
         }
 
+
         .footer-socials a {
             color: #777;
+
             text-decoration: none;
 
             transition: 0.2s ease;
         }
 
+
         .footer-socials a:hover {
-            color: white;
+            color: #ff8bc3;
+
+            text-shadow:
+                0 0 15px rgba(255,105,180,0.45);
         }
 
-        /* =========================
-           ANIMATION
-        ========================= */
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
 
         @keyframes fadeUp {
+
             from {
                 opacity: 0;
-                transform: translateY(30px);
+
+                transform:
+                    translateY(30px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+
+                transform:
+                    translateY(0);
             }
+
         }
+
 
         .social-card {
-            animation: fadeUp 0.7s ease both;
+            animation:
+                fadeUp 0.7s ease both;
         }
 
-        .social-card:nth-child(1) { animation-delay: .05s; }
-        .social-card:nth-child(2) { animation-delay: .10s; }
-        .social-card:nth-child(3) { animation-delay: .15s; }
-        .social-card:nth-child(4) { animation-delay: .20s; }
-        .social-card:nth-child(5) { animation-delay: .25s; }
-        .social-card:nth-child(6) { animation-delay: .30s; }
-        .social-card:nth-child(7) { animation-delay: .35s; }
 
-
-        /* =========================
-           LEFT SIDEBAR MENU
-        ========================= */
-
-        .menu-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            width: 42px;
-            height: 42px;
-
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 11px;
-
-            background: rgba(255,255,255,0.05);
-            color: white;
-
-            font-size: 18px;
-            cursor: pointer;
-
-            transition: 0.25s ease;
-
-            flex-shrink: 0;
+        .social-card:nth-child(1) {
+            animation-delay: .05s;
         }
 
-        .menu-button:hover {
-            background: rgba(140,77,255,0.16);
-            border-color: rgba(140,77,255,0.4);
-            color: #b991ff;
-            transform: scale(1.04);
+        .social-card:nth-child(2) {
+            animation-delay: .10s;
         }
 
-        .menu-button:active {
-            transform: scale(0.95);
+        .social-card:nth-child(3) {
+            animation-delay: .15s;
         }
 
-        .sidebar-overlay {
-            position: fixed;
-            inset: 0;
-
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-
-            opacity: 0;
-            visibility: hidden;
-
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-
-            z-index: 150;
+        .social-card:nth-child(4) {
+            animation-delay: .20s;
         }
 
-        .sidebar-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .social-card:nth-child(5) {
+            animation-delay: .25s;
         }
 
-        .sidebar {
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 285px;
-            height: 100vh;
-            height: 100dvh;
-
-            padding: 24px 20px;
-
-            background:
-                radial-gradient(
-                    circle at 0% 0%,
-                    rgba(124,60,255,0.15),
-                    transparent 35%
-                ),
-                #08070b;
-
-            border-right: 1px solid rgba(140,77,255,0.25);
-
-            box-shadow: 20px 0 60px rgba(0,0,0,0.55);
-
-            transform: translateX(-100%);
-
-            transition:
-                transform 0.35s cubic-bezier(.77,0,.18,1);
-
-            z-index: 200;
-
-            display: flex;
-            flex-direction: column;
+        .social-card:nth-child(6) {
+            animation-delay: .30s;
         }
 
-        .sidebar.active {
-            transform: translateX(0);
+        .social-card:nth-child(7) {
+            animation-delay: .35s;
         }
 
-        .sidebar-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
 
-            padding-bottom: 22px;
+        /* =========================================================
+           PC
+        ========================================================= */
 
-            border-bottom: 1px solid rgba(255,255,255,0.07);
+        @media (min-width: 851px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .menu-button {
+                order: 1;
+            }
+
+            .navbar .logo {
+                order: 2;
+            }
+
+            .navbar .nav-links {
+                order: 3;
+            }
+
+            .navbar .nav-button {
+                order: 4;
+            }
+
         }
 
-        .sidebar-logo {
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
 
-        .sidebar-logo span {
-            color: #8c4dff;
-        }
-
-        .sidebar-close {
-            width: 40px;
-            height: 40px;
-
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
-
-            background: rgba(255,255,255,0.05);
-            color: white;
-
-            font-size: 17px;
-            cursor: pointer;
-
-            transition: 0.25s ease;
-        }
-
-        .sidebar-close:hover {
-            background: rgba(255,70,90,0.12);
-            border-color: rgba(255,70,90,0.3);
-        }
-
-        .sidebar-links {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-
-            margin-top: 25px;
-        }
-
-        .sidebar-links a {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-
-            padding: 14px 15px;
-
-            border-radius: 11px;
-
-            color: #aaa;
-
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-
-            transition: 0.25s ease;
-        }
-
-        .sidebar-links a i {
-            width: 20px;
-            text-align: center;
-        }
-
-        .sidebar-links a:hover {
-            color: white;
-            background: rgba(140,77,255,0.13);
-            transform: translateX(4px);
-        }
-
-        .sidebar-subscribe {
-            margin-top: auto;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
-
-            padding: 13px;
-
-            border-radius: 11px;
-
-            background: #7c3cff;
-            color: white;
-
-            text-decoration: none;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            transition: 0.25s ease;
-        }
-
-        .sidebar-subscribe:hover {
-            background: #925cff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(124,60,255,0.25);
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
+        /* =========================================================
+           TABLET / IPAD
+        ========================================================= */
 
         @media (max-width: 850px) {
 
@@ -778,38 +1424,60 @@
             }
 
             .nav-links {
-                display: none;
+                display: none !important;
+            }
+
+            .navbar .nav-button {
+                margin-left: auto;
             }
 
             .social-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
             .youtube-box {
                 flex-direction: column;
+
                 align-items: flex-start;
             }
 
             .youtube-button {
                 width: 100%;
+
                 justify-content: center;
             }
+
         }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
 
         @media (max-width: 520px) {
 
             .navbar {
                 padding: 0 15px;
+
                 gap: 10px;
             }
 
             .menu-button {
                 width: 40px;
+
                 height: 40px;
+
+                flex-basis: 40px;
+            }
+
+            .logo {
+                font-size: 20px;
             }
 
             .hero {
                 padding-left: 20px;
+
                 padding-right: 20px;
             }
 
@@ -819,6 +1487,7 @@
 
             .social-section {
                 padding-left: 20px;
+
                 padding-right: 20px;
             }
 
@@ -828,160 +1497,63 @@
 
             .youtube-section {
                 padding-left: 20px;
+
                 padding-right: 20px;
+            }
+
+            .youtube-box {
+                padding: 25px;
             }
 
             footer {
                 flex-direction: column;
+
                 gap: 20px;
+
                 text-align: center;
             }
+
+            .color-orb {
+                width: 280px;
+
+                height: 280px;
+
+                filter: blur(70px);
+
+                opacity: 0.20;
+            }
+
         }
+
     </style>
-
-<style id="pc-sidebar-fix">
-/* PC + tablet sidebar controls */
-.menu-button {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 42px;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    border: 1px solid rgba(180, 80, 255, 0.35);
-    border-radius: 10px;
-    background: rgba(15, 15, 20, 0.9);
-    color: #fff;
-    cursor: pointer;
-    font-size: 20px;
-    transition: 0.25s ease;
-    z-index: 101;
-}
-
-.menu-button:hover {
-    background: rgba(130, 50, 220, 0.22);
-    border-color: rgba(190, 90, 255, 0.75);
-    transform: translateY(-1px);
-}
-
-.navbar {
-    display: flex !important;
-    align-items: center;
-    gap: 15px;
-}
-
-.navbar .logo {
-    flex: 0 0 auto;
-}
-
-.navbar .nav-links {
-    margin-left: auto;
-}
-
-.navbar .nav-button {
-    flex: 0 0 auto;
-}
-
-/* Sidebar must be usable on PC too */
-.sidebar {
-    display: flex !important;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: min(320px, 85vw);
-    height: 100vh;
-    z-index: 1001;
-    transform: translateX(-105%);
-    transition: transform 0.3s ease;
-    overflow-y: auto;
-}
-
-.sidebar.active {
-    transform: translateX(0);
-}
-
-.sidebar-overlay {
-    display: block !important;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
-/* PC: keep the normal top navigation AND make the 3-line menu available */
-@media (min-width: 851px) {
-    .navbar {
-        padding: 0 5%;
-    }
-
-    .menu-button {
-        order: 1;
-    }
-
-    .navbar .logo {
-        order: 2;
-    }
-
-    .navbar .nav-links {
-        order: 3;
-    }
-
-    .navbar .nav-button {
-        order: 4;
-    }
-}
-
-/* Smaller screens: use the sidebar as the main navigation */
-@media (max-width: 850px) {
-    .navbar {
-        padding: 0 20px;
-    }
-
-    .navbar .nav-links {
-        display: none !important;
-    }
-
-    .navbar .nav-button {
-        margin-left: auto;
-    }
-}
-
-@media (max-width: 520px) {
-    .navbar {
-        padding: 0 15px;
-        gap: 10px;
-    }
-
-    .menu-button {
-        width: 40px;
-        height: 40px;
-        flex-basis: 40px;
-    }
-}
-</style>
-
 </head>
+
 
 <body>
 
-    <!-- =========================
-         LEFT SIDEBAR
-    ========================== -->
 
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- =========================================================
+         MOVING COLOR LIGHTS
+    ========================================================== -->
 
-    <aside class="sidebar" id="sidebar">
+    <div class="color-orb sakura-orb" id="sakuraOrb"></div>
+    <div class="color-orb yellow-orb" id="yellowOrb"></div>
+    <div class="color-orb blue-orb" id="blueOrb"></div>
+
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <aside
+        class="sidebar"
+        id="sidebar">
 
         <div class="sidebar-header">
 
@@ -989,83 +1561,138 @@
                 hanah<span>.</span>
             </div>
 
-            <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
+            <button
+                class="sidebar-close"
+                id="sidebarClose"
+                aria-label="Close menu">
+
                 <i class="fa-solid fa-xmark"></i>
+
             </button>
 
         </div>
 
+
         <nav class="sidebar-links">
 
             <a href="#home">
+
                 <i class="fa-solid fa-house"></i>
+
                 <span>Home</span>
+
             </a>
+
 
             <a href="#socials">
+
                 <i class="fa-solid fa-share-nodes"></i>
+
                 <span>Socials</span>
+
             </a>
+
 
             <a href="#youtube">
+
                 <i class="fa-brands fa-youtube"></i>
+
                 <span>YouTube</span>
+
             </a>
 
+
             <a href="./Fans.html">
+
                 <i class="fa-solid fa-heart"></i>
+
                 <span>Top Fans!</span>
+
             </a>
 
         </nav>
 
+
         <a
             class="sidebar-subscribe"
             href="https://www.youtube.com/@HanahxYoutube"
-            target="_blank"
-        >
+            target="_blank">
+
             <i class="fa-brands fa-youtube"></i>
+
             Subscribe
+
         </a>
 
     </aside>
 
 
-    <!-- =========================
+    <!-- =========================================================
          NAVBAR
-    ========================== -->
+    ========================================================== -->
 
     <nav class="navbar">
 
-        <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open menu"
+            aria-expanded="false">
+
             <i class="fa-solid fa-bars"></i>
+
         </button>
 
+
         <div class="logo">
-            hanah<span></span>
+            hanah<span>.</span>
         </div>
 
+
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#socials">Socials</a></li>
-            <li><a href="#youtube">YouTube</a></li>
-            <li><a href="./Fans.html">Top Fans!</a></li>
+
+            <li>
+                <a href="#home">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="#socials">
+                    Socials
+                </a>
+            </li>
+
+            <li>
+                <a href="#youtube">
+                    YouTube
+                </a>
+            </li>
+
+            <li>
+                <a href="./Fans.html">
+                    Top Fans!
+                </a>
+            </li>
+
         </ul>
+
 
         <a
             class="nav-button"
-            href="https://youtube.com/"
-            target="_blank"
-        >
+            href="https://www.youtube.com/@HanahxYoutube"
+            target="_blank">
+
             Subscribe
+
         </a>
 
     </nav>
 
 
-    <!-- =========================
+    <!-- =========================================================
          HERO
-    ========================== -->
+    ========================================================== -->
 
     <main id="home">
 
@@ -1073,45 +1700,60 @@
 
             <div class="hero-content">
 
-                <!-- CHANGE THIS IMAGE -->
                 <img
                     class="profile"
                     src="hanah-profile.jpg"
                     alt="Hanahx profile picture"
                 >
 
+
                 <div class="verified">
+
                     <i class="fa-solid fa-circle-check"></i>
+
                     Official Creator
+
                 </div>
 
+
                 <h1>
+
                     <span>Hanahx</span>
+
                 </h1>
 
+
                 <p>
+
                     Welcome to the hanah website.
                     Find all of my social media, videos,
                     community links, and other platforms in one place.
+
                 </p>
+
 
                 <div class="hero-buttons">
 
                     <a
                         class="primary-button"
                         href="https://www.youtube.com/@HanahxYoutube"
-                        target="_blank"
-                    >
+                        target="_blank">
+
                         <i class="fa-brands fa-youtube"></i>
+
                         Watch on YouTube
+
                     </a>
+
 
                     <a
                         class="secondary-button"
-                        href="#socials"
-                    >
+                        href="#socials">
+
                         <i class="fa-solid fa-link"></i>
+
                         View Socials
+
                     </a>
 
                 </div>
@@ -1121,20 +1763,25 @@
         </section>
 
 
-        <!-- =========================
+        <!-- =====================================================
              SOCIALS
-        ========================== -->
+        ====================================================== -->
 
         <section
             class="social-section"
-            id="socials"
-        >
+            id="socials">
 
             <div class="section-header">
 
-                <small>CONNECT WITH ME</small>
+                <small>
+                    CONNECT WITH ME
+                </small>
 
-                <h2>My Socials</h2>
+
+                <h2>
+                    My Socials
+                </h2>
+
 
                 <p>
                     Find me across the internet.
@@ -1145,21 +1792,31 @@
 
             <div class="social-grid">
 
+
                 <!-- DISCORD -->
 
                 <a
                     class="social-card"
                     href="https://discord.gg/Hq4cXTWCWh"
-                    target="_blank"
-                >
+                    target="_blank">
 
                     <div class="social-icon">
+
                         <i class="fa-brands fa-discord"></i>
+
                     </div>
 
+
                     <div class="social-info">
-                        <h3>Discord</h3>
-                        <p>Join the community</p>
+
+                        <h3>
+                            Discord
+                        </h3>
+
+                        <p>
+                            Join the community
+                        </p>
+
                     </div>
 
                 </a>
@@ -1170,35 +1827,53 @@
                 <a
                     class="social-card"
                     href="https://www.youtube.com/@HanahxYoutube"
-                    target="_blank"
-                >
+                    target="_blank">
 
                     <div class="social-icon">
+
                         <i class="fa-brands fa-youtube"></i>
+
                     </div>
 
+
                     <div class="social-info">
-                        <h3>YouTube</h3>
-                        <p>Videos & livestreams</p>
+
+                        <h3>
+                            YouTube
+                        </h3>
+
+                        <p>
+                            Videos & livestreams
+                        </p>
+
                     </div>
 
                 </a>
 
 
-                <!-- GMAIL -->
+                <!-- EMAIL -->
 
                 <a
                     class="social-card"
-                    href="mailto:Hanahxyoutube@gmail.com"
-                >
+                    href="mailto:Hanahxyoutube@gmail.com">
 
                     <div class="social-icon">
+
                         <i class="fa-solid fa-envelope"></i>
+
                     </div>
 
+
                     <div class="social-info">
-                        <h3>Email</h3>
-                        <p>Business inquiries</p>
+
+                        <h3>
+                            Email
+                        </h3>
+
+                        <p>
+                            Business inquiries
+                        </p>
+
                     </div>
 
                 </a>
@@ -1209,16 +1884,25 @@
                 <a
                     class="social-card"
                     href="https://instagram.com/yourgirlhanahx"
-                    target="_blank"
-                >
+                    target="_blank">
 
                     <div class="social-icon">
+
                         <i class="fa-brands fa-instagram"></i>
+
                     </div>
 
+
                     <div class="social-info">
-                        <h3>Instagram</h3>
-                        <p>Photos & updates</p>
+
+                        <h3>
+                            Instagram
+                        </h3>
+
+                        <p>
+                            Photos & updates
+                        </p>
+
                     </div>
 
                 </a>
@@ -1229,16 +1913,25 @@
                 <a
                     class="social-card"
                     href="https://facebook.com/profile.php?id=100063737641222"
-                    target="_blank"
-                >
+                    target="_blank">
 
                     <div class="social-icon">
+
                         <i class="fa-brands fa-facebook"></i>
+
                     </div>
 
+
                     <div class="social-info">
-                        <h3>Facebook</h3>
-                        <p>Follow me</p>
+
+                        <h3>
+                            Facebook
+                        </h3>
+
+                        <p>
+                            Follow me
+                        </p>
+
                     </div>
 
                 </a>
@@ -1249,16 +1942,25 @@
                 <a
                     class="social-card"
                     href="https://tiktok.com/@yourgirlhanahx"
-                    target="_blank"
-                >
+                    target="_blank">
 
                     <div class="social-icon">
+
                         <i class="fa-brands fa-tiktok"></i>
+
                     </div>
 
+
                     <div class="social-info">
-                        <h3>TikTok</h3>
-                        <p>Short-form videos</p>
+
+                        <h3>
+                            TikTok
+                        </h3>
+
+                        <p>
+                            Short-form videos
+                        </p>
+
                     </div>
 
                 </a>
@@ -1269,33 +1971,42 @@
                 <a
                     class="social-card"
                     href="https://www.roblox.com/users/4418117813/profile"
-                    target="_blank"
-                >
+                    target="_blank">
 
                     <div class="social-icon">
+
                         <i class="fa-solid fa-cube"></i>
+
                     </div>
 
+
                     <div class="social-info">
-                        <h3>Roblox</h3>
-                        <p>Play with me</p>
+
+                        <h3>
+                            Roblox
+                        </h3>
+
+                        <p>
+                            Play with me
+                        </p>
+
                     </div>
 
                 </a>
+
 
             </div>
 
         </section>
 
 
-        <!-- =========================
-             YOUTUBE FEATURE
-        ========================== -->
+        <!-- =====================================================
+             YOUTUBE
+        ====================================================== -->
 
         <section
             class="youtube-section"
-            id="youtube"
-        >
+            id="youtube">
 
             <div class="youtube-box">
 
@@ -1305,20 +2016,26 @@
                         Latest videos.
                     </h2>
 
+
                     <p>
+
                         Watch my latest content, gaming videos,
                         livestreams, and more on YouTube.
+
                     </p>
 
                 </div>
 
+
                 <a
                     class="youtube-button"
                     href="https://www.youtube.com/@HanahxYoutube"
-                    target="_blank"
-                >
+                    target="_blank">
+
                     <i class="fa-brands fa-youtube"></i>
+
                     Visit YouTube
+
                 </a>
 
             </div>
@@ -1328,9 +2045,9 @@
     </main>
 
 
-    <!-- =========================
+    <!-- =========================================================
          FOOTER
-    ========================== -->
+    ========================================================== -->
 
     <footer>
 
@@ -1338,26 +2055,51 @@
             © 2026 Hanahx. All rights reserved.
         </span>
 
+
         <div class="footer-socials">
 
-            <a href="https://www.youtube.com/@HanahxYoutube" target="_blank">
+            <a
+                href="https://www.youtube.com/@HanahxYoutube"
+                target="_blank">
+
                 <i class="fa-brands fa-youtube"></i>
+
             </a>
 
-            <a href="https://instagram.com/yourgirlhanahx" target="_blank">
+
+            <a
+                href="https://instagram.com/yourgirlhanahx"
+                target="_blank">
+
                 <i class="fa-brands fa-instagram"></i>
+
             </a>
 
-            <a href="https://tiktok.com/@yourgirlhanahx" target="_blank">
+
+            <a
+                href="https://tiktok.com/@yourgirlhanahx"
+                target="_blank">
+
                 <i class="fa-brands fa-tiktok"></i>
+
             </a>
 
-            <a href="https://discord.gg/Hq4cXTWCWh" target="_blank">
+
+            <a
+                href="https://discord.gg/Hq4cXTWCWh"
+                target="_blank">
+
                 <i class="fa-brands fa-discord"></i>
+
             </a>
 
-            <a href="https://roblox.com/users/4418117813/profile" target="_blank">
+
+            <a
+                href="https://roblox.com/users/4418117813/profile"
+                target="_blank">
+
                 <i class="fa-solid fa-cube"></i>
+
             </a>
 
         </div>
@@ -1365,41 +2107,288 @@
     </footer>
 
 
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
     <script>
-        const menuButton = document.getElementById("menuButton");
-        const sidebar = document.getElementById("sidebar");
-        const sidebarClose = document.getElementById("sidebarClose");
-        const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const sidebarClose =
+            document.getElementById("sidebarClose");
+
+        const sidebarOverlay =
+            document.getElementById("sidebarOverlay");
+
 
         function openSidebar() {
+
             sidebar.classList.add("active");
+
             sidebarOverlay.classList.add("active");
-            menuButton.setAttribute("aria-expanded", "true");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
             document.body.style.overflow = "hidden";
+
         }
+
 
         function closeSidebar() {
+
             sidebar.classList.remove("active");
+
             sidebarOverlay.classList.remove("active");
-            menuButton.setAttribute("aria-expanded", "false");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
             document.body.style.overflow = "";
+
         }
 
-        menuButton.addEventListener("click", openSidebar);
-        sidebarClose.addEventListener("click", closeSidebar);
-        sidebarOverlay.addEventListener("click", closeSidebar);
 
-        document.querySelectorAll(".sidebar-links a").forEach(link => {
-            link.addEventListener("click", closeSidebar);
-        });
+        menuButton.addEventListener(
+            "click",
+            openSidebar
+        );
 
-        document.addEventListener("keydown", event => {
-            if (event.key === "Escape") {
-                closeSidebar();
+
+        sidebarClose.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+
+        sidebarOverlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+
+        document
+            .querySelectorAll(".sidebar-links a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    closeSidebar
+                );
+
+            });
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (event.key === "Escape") {
+
+                    closeSidebar();
+
+                }
+
             }
-        });
+        );
+
+
+        /* =====================================================
+           MOVING COLOR ORBS
+        ====================================================== */
+
+        const sakura =
+            document.getElementById("sakuraOrb");
+
+        const yellow =
+            document.getElementById("yellowOrb");
+
+        const blue =
+            document.getElementById("blueOrb");
+
+
+        let time = 0;
+
+
+        function animateColors() {
+
+            time += 0.003;
+
+
+            /* Sakura */
+
+            const sakuraX =
+                50 +
+                Math.sin(time * 1.05) * 38;
+
+            const sakuraY =
+                30 +
+                Math.cos(time * 0.8) * 27;
+
+
+            sakura.style.left =
+                sakuraX + "%";
+
+            sakura.style.top =
+                sakuraY + "%";
+
+
+            /* Yellow */
+
+            const yellowX =
+                50 +
+                Math.cos(time * 0.72 + 2) * 43;
+
+            const yellowY =
+                55 +
+                Math.sin(time * 0.95 + 1) * 35;
+
+
+            yellow.style.left =
+                yellowX + "%";
+
+            yellow.style.top =
+                yellowY + "%";
+
+
+            /* Blue */
+
+            const blueX =
+                50 +
+                Math.sin(time * 0.62 + 4) * 42;
+
+            const blueY =
+                55 +
+                Math.cos(time * 0.88 + 3) * 36;
+
+
+            blue.style.left =
+                blueX + "%";
+
+            blue.style.top =
+                blueY + "%";
+
+
+            /*
+                Subtle brightness changes while
+                the colors travel around the page.
+            */
+
+            const sakuraBrightness =
+                0.19 +
+                Math.abs(Math.sin(time * 1.3)) * 0.16;
+
+            const yellowBrightness =
+                0.17 +
+                Math.abs(Math.cos(time * 1.1)) * 0.15;
+
+            const blueBrightness =
+                0.19 +
+                Math.abs(Math.sin(time * 0.9)) * 0.16;
+
+
+            sakura.style.opacity =
+                sakuraBrightness;
+
+            yellow.style.opacity =
+                yellowBrightness;
+
+            blue.style.opacity =
+                blueBrightness;
+
+
+            requestAnimationFrame(
+                animateColors
+            );
+
+        }
+
+
+        animateColors();
+
+
+        /* =====================================================
+           MOUSE COLOR INTERACTION
+        ====================================================== */
+
+        let mouseX = 50;
+        let mouseY = 50;
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX =
+                    (event.clientX /
+                    window.innerWidth) * 100;
+
+                mouseY =
+                    (event.clientY /
+                    window.innerHeight) * 100;
+
+            }
+        );
+
+
+        /*
+            Very subtle movement toward the cursor.
+            This makes the colors feel alive without
+            following the cursor directly.
+        */
+
+        let cursorTime = 0;
+
+
+        function cursorGlow() {
+
+            cursorTime += 0.01;
+
+
+            sakura.style.transform =
+                `translate(
+                    ${Math.sin(cursorTime) * 8}px,
+                    ${Math.cos(cursorTime * 0.8) * 8}px
+                )`;
+
+
+            yellow.style.transform =
+                `translate(
+                    ${Math.cos(cursorTime * 0.7) * 10}px,
+                    ${Math.sin(cursorTime * 0.9) * 10}px
+                )`;
+
+
+            blue.style.transform =
+                `translate(
+                    ${Math.sin(cursorTime * 0.6) * 12}px,
+                    ${Math.cos(cursorTime * 0.75) * 12}px
+                )`;
+
+
+            requestAnimationFrame(
+                cursorGlow
+            );
+
+        }
+
+
+        cursorGlow();
+
     </script>
 
 </body>
 </html>
-```
